@@ -1,10 +1,10 @@
 #![no_main]
 
-use libfuzzer_sys::fuzz_target;
-use signify_crypto::{
+use keri_cesr::crypto::{
     salt::{KeyDerivationProfile, Salt, SecurityTier},
     verifier::KeyTransferability,
 };
+use libfuzzer_sys::fuzz_target;
 
 fuzz_target!(|data: &[u8]| {
     let _ = Salt::parse_raw_prefix(data, SecurityTier::Low);
@@ -18,15 +18,8 @@ fuzz_target!(|data: &[u8]| {
     {
         let path_bytes = data.get(16..).unwrap_or_default();
         if let Ok(path) = std::str::from_utf8(path_bytes) {
-            for transferability in [
-                KeyTransferability::Transferable,
-                KeyTransferability::NonTransferable,
-            ] {
-                let _ = salt.derive_signer_with_profile(
-                    path,
-                    transferability,
-                    KeyDerivationProfile::Temporary,
-                );
+            for transferability in [KeyTransferability::Transferable, KeyTransferability::NonTransferable] {
+                let _ = salt.derive_signer_with_profile(path, transferability, KeyDerivationProfile::Temporary);
             }
         }
     }

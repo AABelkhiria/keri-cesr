@@ -1,11 +1,11 @@
 #![no_main]
 #![forbid(unsafe_code)]
 
-use libfuzzer_sys::fuzz_target;
-use signify_cesr::{
+use keri_cesr::{
     base64::{decode_u64, decode_url_safe},
     bytes::{bytes_to_integer, utf8_text},
 };
+use libfuzzer_sys::fuzz_target;
 
 fuzz_target!(|data: &[u8]| {
     let _ = bytes_to_integer(data);

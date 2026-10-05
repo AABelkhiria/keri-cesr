@@ -1,0 +1,141 @@
+[package]
+name = "keri-cesr-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+keri-cesr = { path = "..", features = ["crypto"] }
+libfuzzer-sys = "0.4.13"
+
+[[bin]]
+name = "foundations"
+path = "fuzz_targets/foundations.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "code_tables"
+path = "fuzz_targets/code_tables.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "matter"
+path = "fuzz_targets/matter.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "indexer"
+path = "fuzz_targets/indexer.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "counter"
+path = "fuzz_targets/counter.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "number"
+path = "fuzz_targets/number.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "sequence"
+path = "fuzz_targets/sequence.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "bexter"
+path = "fuzz_targets/bexter.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "path"
+path = "fuzz_targets/path.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "digest"
+path = "fuzz_targets/digest.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "verifier"
+path = "fuzz_targets/verifier.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "signature"
+path = "fuzz_targets/signature.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "signer"
+path = "fuzz_targets/signer.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "salt"
+path = "fuzz_targets/salt.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "cipher"
+path = "fuzz_targets/cipher.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "decrypter"
+path = "fuzz_targets/decrypter.rs"
+test = false
+doc = false
+bench = false
+
+[workspace]
+members = ["."]
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+dbg_macro = "deny"
+expect_used = "deny"
+indexing_slicing = "deny"
+panic = "deny"
+print_stderr = "deny"
+print_stdout = "deny"
+todo = "deny"
+unimplemented = "deny"
+unwrap_used = "deny"

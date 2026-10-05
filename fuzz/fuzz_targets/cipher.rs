@@ -1,9 +1,9 @@
 #![no_main]
 #![forbid(unsafe_code)]
 
+use keri_cesr::bytes::utf8_text;
+use keri_cesr::crypto::cipher::{Ciphertext, CiphertextKind, Encrypter};
 use libfuzzer_sys::fuzz_target;
-use signify_cesr::bytes::utf8_text;
-use signify_crypto::cipher::{Ciphertext, CiphertextKind, Encrypter};
 
 fuzz_target!(|data: &[u8]| {
     let _ = Ciphertext::infer_from_raw(data);

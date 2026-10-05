@@ -1,13 +1,13 @@
 #![no_main]
 #![forbid(unsafe_code)]
 
-use libfuzzer_sys::fuzz_target;
-use signify_cesr::bytes::utf8_text;
-use signify_crypto::{
+use keri_cesr::bytes::utf8_text;
+use keri_cesr::crypto::{
     cipher::{Ciphertext, CiphertextKind, Decrypter},
     salt::SecurityTier,
     verifier::KeyTransferability,
 };
+use libfuzzer_sys::fuzz_target;
 
 // Deterministic public fuzz key; never a production secret.
 const FIXED_PRIVATE_KEY: [u8; 32] = [0x42; 32];

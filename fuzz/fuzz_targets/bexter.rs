@@ -1,8 +1,8 @@
 #![no_main]
 #![forbid(unsafe_code)]
 
+use keri_cesr::{bexter::Base64Text, bytes::utf8_text};
 use libfuzzer_sys::fuzz_target;
-use signify_cesr::{bexter::Base64Text, bytes::utf8_text};
 
 fuzz_target!(|data: &[u8]| {
     let _ = Base64Text::parse_qb2(data);

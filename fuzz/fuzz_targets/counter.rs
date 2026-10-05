@@ -1,8 +1,8 @@
 #![no_main]
 #![forbid(unsafe_code)]
 
+use keri_cesr::{bytes::utf8_text, counter::Counter};
 use libfuzzer_sys::fuzz_target;
-use signify_cesr::{bytes::utf8_text, counter::Counter};
 
 fuzz_target!(|data: &[u8]| {
     let _ = Counter::parse_qb2(data);

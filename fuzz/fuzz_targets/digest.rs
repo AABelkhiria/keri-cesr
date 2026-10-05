@@ -1,9 +1,9 @@
 #![no_main]
 #![forbid(unsafe_code)]
 
+use keri_cesr::bytes::utf8_text;
+use keri_cesr::crypto::digest::{Digest, DigestAlgorithm};
 use libfuzzer_sys::fuzz_target;
-use signify_cesr::bytes::utf8_text;
-use signify_crypto::digest::{Digest, DigestAlgorithm};
 
 fuzz_target!(|data: &[u8]| {
     let _ = Digest::parse_raw_prefix(DigestAlgorithm::Blake3_256, data);

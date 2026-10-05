@@ -1,12 +1,8 @@
 #![no_main]
 #![forbid(unsafe_code)]
 
+use keri_cesr::{bytes::utf8_text, code::DerivationCode, matter::QualifiedMaterial};
 use libfuzzer_sys::fuzz_target;
-use signify_cesr::{
-    bytes::utf8_text,
-    code::DerivationCode,
-    matter::QualifiedMaterial,
-};
 
 fuzz_target!(|data: &[u8]| {
     let _ = QualifiedMaterial::parse_qb2(data);
