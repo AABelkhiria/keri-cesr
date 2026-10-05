@@ -3,7 +3,7 @@
 use std::hint::black_box;
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_crypto::{
+use keri_cesr::crypto::{
     cipher::{Ciphertext, CiphertextKind, Decrypter, Encrypter, SEED_CIPHERTEXT_RAW_SIZE},
     salt::{Salt, SecurityTier},
     signer::Signer,

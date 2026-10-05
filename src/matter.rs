@@ -36,7 +36,7 @@ pub const MAX_RAW_MATERIAL_BYTES: usize = MAX_DECODED_BYTES - 8;
 /// drop.
 ///
 /// ```compile_fail
-/// use signify_cesr::{CesrError, code::DerivationCode, matter::QualifiedMaterial};
+/// use keri_cesr::{CesrError, code::DerivationCode, matter::QualifiedMaterial};
 ///
 /// fn main() -> Result<(), CesrError> {
 ///     let material = QualifiedMaterial::new(DerivationCode::ED25519_SEED, &[0_u8; 32])?;
@@ -107,7 +107,7 @@ impl QualifiedMaterial {
     /// size, or cannot be represented by the selected variable code family.
     ///
     /// ```
-    /// use signify_cesr::{
+    /// use keri_cesr::{
     ///     CesrError,
     ///     code::DerivationCode,
     ///     matter::QualifiedMaterial,

@@ -62,7 +62,7 @@ pub fn concatenate(parts: &[&[u8]]) -> Result<Vec<u8>, CesrError> {
 /// fit in the requested width.
 ///
 /// ```
-/// use signify_cesr::{CesrError, bytes::{bytes_to_integer, integer_to_bytes}};
+/// use keri_cesr::{CesrError, bytes::{bytes_to_integer, integer_to_bytes}};
 ///
 /// # fn main() -> Result<(), CesrError> {
 /// let encoded = integer_to_bytes(66_051, 3)?;

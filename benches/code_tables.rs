@@ -3,7 +3,7 @@
 use std::hint::black_box;
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_cesr::code::{CodeFamily, DerivationCode};
+use keri_cesr::code::{CodeFamily, DerivationCode};
 
 fn benchmark_code_tables(criterion: &mut Criterion) {
     for code in ["A", "0I", "1AAJ", "9AAB"] {

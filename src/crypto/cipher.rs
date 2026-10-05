@@ -7,17 +7,17 @@
 
 use std::{fmt, str::FromStr};
 
-use nacl_sealed_box::{Plaintext, PublicKey as X25519PublicKey, SecretKey as X25519SecretKey, seal_with_rng, unseal};
-use rand_core::{TryCryptoRng, TryRng};
-use signify_cesr::{
+use crate::{
     CesrError,
     code::DerivationCode,
     matter::{ParsedMaterial, QualifiedMaterial},
 };
+use nacl_sealed_box::{Plaintext, PublicKey as X25519PublicKey, SecretKey as X25519SecretKey, seal_with_rng, unseal};
+use rand_core::{TryCryptoRng, TryRng};
 use subtle::ConstantTimeEq;
 use zeroize::Zeroizing;
 
-use crate::{
+use crate::crypto::{
     CryptoError,
     salt::{Salt, SecurityTier},
     signer::Signer,
@@ -103,7 +103,7 @@ impl CiphertextBytes {
 /// cloned, but debug output omits its bytes because it normally carries encrypted secrets.
 ///
 /// ```
-/// use signify_crypto::cipher::{Ciphertext, CiphertextKind, SALT_CIPHERTEXT_RAW_SIZE};
+/// use keri_cesr::crypto::cipher::{Ciphertext, CiphertextKind, SALT_CIPHERTEXT_RAW_SIZE};
 ///
 /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
 /// let ciphertext = Ciphertext::from_raw(
@@ -119,7 +119,7 @@ impl CiphertextBytes {
 /// Invalid ciphertext state cannot be assembled directly:
 ///
 /// ```compile_fail
-/// use signify_crypto::cipher::{Ciphertext, CiphertextKind};
+/// use keri_cesr::crypto::cipher::{Ciphertext, CiphertextKind};
 ///
 /// let invalid = Ciphertext {
 ///     kind: CiphertextKind::QualifiedSeed,
@@ -147,7 +147,7 @@ pub struct ParsedCiphertext {
 /// [`Ciphertext`] whose CESR code records the plaintext kind.
 ///
 /// ```
-/// use signify_crypto::{
+/// use keri_cesr::crypto::{
 ///     cipher::{CiphertextKind, Encrypter},
 ///     signer::Signer,
 ///     verifier::KeyTransferability,
@@ -166,7 +166,7 @@ pub struct ParsedCiphertext {
 /// Plaintext kind cannot be omitted or selected with a boolean/string mode:
 ///
 /// ```compile_fail
-/// use signify_crypto::cipher::Encrypter;
+/// use keri_cesr::crypto::cipher::Encrypter;
 ///
 /// # fn demo(encrypter: &Encrypter) {
 /// let ciphertext = encrypter.encrypt();
@@ -800,14 +800,14 @@ impl fmt::Display for Ciphertext {
 /// material.
 ///
 /// ```
-/// use signify_crypto::{
+/// use keri_cesr::crypto::{
 ///     cipher::{Decrypter, Encrypter},
 ///     salt::{Salt, SecurityTier},
 ///     signer::Signer,
 ///     verifier::KeyTransferability,
 /// };
 ///
-/// # fn main() -> Result<(), signify_crypto::CryptoError> {
+/// # fn main() -> Result<(), keri_cesr::crypto::CryptoError> {
 /// let recipient = Signer::from_seed(&[7_u8; 32], KeyTransferability::Transferable)?;
 /// let encrypter = Encrypter::from_verification_key(recipient.verifier())?;
 /// let ciphertext = encrypter.encrypt_salt(&Salt::from_raw(&[5_u8; 16], SecurityTier::Low)?)?;
@@ -823,7 +823,7 @@ impl fmt::Display for Ciphertext {
 ///
 /// ```compile_fail
 /// fn require_clone<T: Clone>() {}
-/// require_clone::<signify_crypto::cipher::Decrypter>();
+/// require_clone::<keri_cesr::crypto::cipher::Decrypter>();
 /// ```
 pub struct Decrypter {
     raw: Zeroizing<[u8; X25519_PRIVATE_KEY_SIZE]>,
@@ -1113,7 +1113,7 @@ fn reject_trailing(context: &'static str, total: usize, consumed: usize) -> Resu
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{salt::SecurityTier, verifier::VerificationKey};
+    use crate::crypto::{salt::SecurityTier, verifier::VerificationKey};
 
     const SEED_QB64: &str = "PM9jOGWNYfjM_oLXJNaQ8UlFSAV5ACjsUY7J16xfzrlpc9Ve3A5WYrZ4o_NHtP5lhp78Usspl9fyFdnCdItNd5JyqZ6dt8SXOt6TOqOCs-gy0obrwFkPPqBvVkEw";
     const SALT_QB64: &str =

@@ -3,7 +3,7 @@
 use std::hint::black_box;
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_cesr::sequence::SequenceNumber;
+use keri_cesr::sequence::SequenceNumber;
 
 fn benchmark_sequence(criterion: &mut Criterion) {
     criterion.bench_function("sequence_construct_u128_max", |bencher| {

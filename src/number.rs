@@ -22,7 +22,7 @@ pub const MAX_NUMBER_HEX_DIGITS: usize = 32;
 /// canonically whenever the value is encoded, so a safe value cannot retain a non-minimal form.
 ///
 /// ```
-/// use signify_cesr::{CesrError, code::DerivationCode, number::CesrNumber};
+/// use keri_cesr::{CesrError, code::DerivationCode, number::CesrNumber};
 ///
 /// # fn main() -> Result<(), CesrError> {
 /// let number = CesrNumber::from_hex("10000")?;
@@ -36,7 +36,7 @@ pub const MAX_NUMBER_HEX_DIGITS: usize = 32;
 /// Negative values are excluded by the unsigned API:
 ///
 /// ```compile_fail
-/// use signify_cesr::number::CesrNumber;
+/// use keri_cesr::number::CesrNumber;
 ///
 /// let negative = CesrNumber::new(-1);
 /// ```

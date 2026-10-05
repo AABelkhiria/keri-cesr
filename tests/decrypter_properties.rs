@@ -1,14 +1,16 @@
 //! Property and misuse coverage for X25519 sealed-box decryption.
 
-use proptest::{prelude::*, test_runner::TestCaseError};
-use signify_cesr::{code::DerivationCode, matter::QualifiedMaterial};
-use signify_crypto::{
+#![cfg(feature = "crypto")]
+
+use keri_cesr::crypto::{
     CryptoError,
     cipher::{Ciphertext, CiphertextKind, Decrypter, Encrypter, X25519_PRIVATE_KEY_SIZE},
     salt::{Salt, SecurityTier},
     signer::Signer,
     verifier::KeyTransferability,
 };
+use keri_cesr::{code::DerivationCode, matter::QualifiedMaterial};
+use proptest::{prelude::*, test_runner::TestCaseError};
 
 fn crypto_value<T>(result: Result<T, CryptoError>) -> Result<T, TestCaseError> {
     result.map_err(|error| TestCaseError::fail(error.to_string()))

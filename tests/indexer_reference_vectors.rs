@@ -2,11 +2,11 @@
 
 use std::error::Error;
 
-use serde::Deserialize;
-use signify_cesr::{
+use keri_cesr::{
     CesrError,
     indexer::{IndexedMaterial, IndexerCode},
 };
+use serde::Deserialize;
 
 const REFERENCE_SHA: &str = "ae92eceb8e776ad57669707bff7f84db9390b711";
 
@@ -91,7 +91,7 @@ struct RejectedCase {
 fn fixture() -> Result<Fixture, serde_json::Error> {
     serde_json::from_str(include_str!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../../fixtures/cesr-indexer/v1.json"
+        "/fixtures/cesr-indexer/v1.json"
     )))
 }
 

@@ -3,7 +3,7 @@
 use std::hint::black_box;
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_cesr::{
+use keri_cesr::{
     base64::{decode_u64, decode_url_safe, encode_u64, encode_url_safe},
     bytes::{bytes_to_integer, integer_to_bytes},
 };

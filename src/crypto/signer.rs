@@ -7,16 +7,16 @@
 
 use std::{error::Error, fmt};
 
-use ed25519_dalek::{Signer as _, SigningKey};
-use signify_cesr::{
+use crate::{
     CesrError,
     code::DerivationCode,
     indexer::IndexerCode,
     matter::{ParsedMaterial, QualifiedMaterial},
 };
+use ed25519_dalek::{Signer as _, SigningKey};
 use zeroize::Zeroizing;
 
-use crate::{
+use crate::crypto::{
     CryptoError,
     signature::{IndexedSignature, SignatureAlgorithm, UnindexedSignature},
     verifier::{KeyTransferability, VerificationAlgorithm, VerificationKey},
@@ -121,7 +121,7 @@ impl SignaturePlacement {
 /// temporaries are erased on drop. Borrowed input remains the caller's responsibility.
 ///
 /// ```
-/// use signify_crypto::{
+/// use keri_cesr::crypto::{
 ///     signer::{SignaturePlacement, Signer},
 ///     verifier::KeyTransferability,
 /// };
@@ -137,7 +137,7 @@ impl SignaturePlacement {
 /// Secret state cannot be assembled or accessed directly:
 ///
 /// ```compile_fail
-/// use signify_crypto::signer::Signer;
+/// use keri_cesr::crypto::signer::Signer;
 ///
 /// let signer = Signer { signing_key: [0_u8; 32], verifier: () };
 /// let leaked = signer.signing_key;
@@ -412,7 +412,7 @@ impl Signer {
     /// Exports the qualified seed for sealing, without leaving this crate.
     ///
     /// This is the one place a signer's seed is materialized. It is crate-private on purpose: the
-    /// only caller is [`Encrypter::encrypt_signer`](crate::cipher::Encrypter::encrypt_signer),
+    /// only caller is [`Encrypter::encrypt_signer`](crate::crypto::cipher::Encrypter::encrypt_signer),
     /// which seals the bytes immediately, so no seed ever crosses a crate boundary. The buffer
     /// zeroizes on drop.
     pub(crate) fn expose_qualified_seed_bytes(&self) -> Result<Zeroizing<Vec<u8>>, CryptoError> {

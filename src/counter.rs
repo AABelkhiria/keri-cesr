@@ -62,7 +62,7 @@ impl CounterCodeSize {
 /// The private representation makes unsupported or reserved codes unrepresentable after parsing.
 ///
 /// ```compile_fail
-/// use signify_cesr::counter::CounterCode;
+/// use keri_cesr::counter::CounterCode;
 ///
 /// let invalid = CounterCode("-M");
 /// ```

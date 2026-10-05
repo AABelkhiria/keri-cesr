@@ -1,10 +1,12 @@
 //! Property and invalid-near-miss coverage for CESR-qualified digests.
 
-use proptest::{prelude::*, test_runner::TestCaseError};
-use signify_crypto::{
+#![cfg(feature = "crypto")]
+
+use keri_cesr::crypto::{
     CryptoError,
     digest::{DIGEST_RAW_SIZE, Digest, DigestAlgorithm},
 };
+use proptest::{prelude::*, test_runner::TestCaseError};
 
 fn digest_value<T>(result: Result<T, CryptoError>) -> Result<T, TestCaseError> {
     result.map_err(|error| TestCaseError::fail(error.to_string()))

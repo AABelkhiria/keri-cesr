@@ -24,7 +24,7 @@ pub const SEQUENCE_RAW_SIZE: usize = 16;
 /// loss.
 ///
 /// ```
-/// use signify_cesr::{CesrError, code::DerivationCode, sequence::SequenceNumber};
+/// use keri_cesr::{CesrError, code::DerivationCode, sequence::SequenceNumber};
 ///
 /// # fn main() -> Result<(), CesrError> {
 /// let sequence = SequenceNumber::from_hex("10")?;
@@ -39,7 +39,7 @@ pub const SEQUENCE_RAW_SIZE: usize = 16;
 /// Negative ordinals are excluded by the unsigned API:
 ///
 /// ```compile_fail
-/// use signify_cesr::sequence::SequenceNumber;
+/// use keri_cesr::sequence::SequenceNumber;
 ///
 /// let sequence = SequenceNumber::new(-1);
 /// ```

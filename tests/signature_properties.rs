@@ -1,10 +1,12 @@
 //! Property and invalid-near-miss coverage for CESR unindexed signatures.
 
-use proptest::{prelude::*, test_runner::TestCaseError};
-use signify_crypto::{
+#![cfg(feature = "crypto")]
+
+use keri_cesr::crypto::{
     CryptoError,
     signature::{SignatureAlgorithm, UnindexedSignature},
 };
+use proptest::{prelude::*, test_runner::TestCaseError};
 
 fn algorithm() -> impl Strategy<Value = SignatureAlgorithm> {
     prop_oneof![

@@ -3,7 +3,7 @@
 use std::hint::black_box;
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_cesr::indexer::{IndexedMaterial, IndexerCode};
+use keri_cesr::indexer::{IndexedMaterial, IndexerCode};
 
 fn benchmark_indexer(criterion: &mut Criterion) {
     let signature = [0x5a_u8; 64];

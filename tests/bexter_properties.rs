@@ -1,7 +1,7 @@
 //! Property and invalid-near-miss coverage for CESR Base64-text material.
 
+use keri_cesr::{CesrError, bexter::Base64Text};
 use proptest::{prelude::*, test_runner::TestCaseError};
-use signify_cesr::{CesrError, bexter::Base64Text};
 
 fn test_value<T>(result: Result<T, CesrError>) -> Result<T, TestCaseError> {
     result.map_err(|error| TestCaseError::fail(error.to_string()))

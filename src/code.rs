@@ -105,7 +105,7 @@ impl CodeSize {
 /// [`DerivationCode::ALL`], including reserved codes without an upstream semantic name.
 ///
 /// ```compile_fail
-/// use signify_cesr::code::DerivationCode;
+/// use keri_cesr::code::DerivationCode;
 ///
 /// let invalid = DerivationCode("R");
 /// ```

@@ -3,7 +3,7 @@
 use std::hint::black_box;
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_cesr::counter::{Counter, CounterCode, CounterVersion};
+use keri_cesr::counter::{Counter, CounterCode, CounterVersion};
 
 fn benchmark_counter(criterion: &mut Criterion) {
     criterion.bench_function("counter_construct_short", |bencher| {

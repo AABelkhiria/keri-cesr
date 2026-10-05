@@ -3,7 +3,7 @@
 use std::{hint::black_box, time::Duration};
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_crypto::{
+use keri_cesr::crypto::{
     salt::{KeyDerivationProfile, Salt, SecurityTier},
     verifier::KeyTransferability,
 };

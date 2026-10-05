@@ -7,7 +7,7 @@
 
 use std::{fmt, str::FromStr};
 
-use signify_cesr::{
+use crate::{
     CesrError,
     bytes::utf8_text,
     code::DerivationCode,
@@ -15,7 +15,7 @@ use signify_cesr::{
     matter::{ParsedMaterial, QualifiedMaterial},
 };
 
-use crate::{
+use crate::crypto::{
     CryptoError,
     verifier::{SIGNATURE_SIZE, VerificationAlgorithm, VerificationKey},
 };
@@ -53,7 +53,7 @@ impl SignatureAlgorithm {
 /// though the pinned reference has no corresponding verifier implementation.
 ///
 /// ```
-/// use signify_crypto::signature::{SignatureAlgorithm, UnindexedSignature};
+/// use keri_cesr::crypto::signature::{SignatureAlgorithm, UnindexedSignature};
 ///
 /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
 /// let signature = UnindexedSignature::from_raw(SignatureAlgorithm::Ed25519, &[0_u8; 64])?;
@@ -66,7 +66,7 @@ impl SignatureAlgorithm {
 /// Invalid signature state cannot be assembled directly:
 ///
 /// ```compile_fail
-/// use signify_crypto::signature::{SignatureAlgorithm, UnindexedSignature};
+/// use keri_cesr::crypto::signature::{SignatureAlgorithm, UnindexedSignature};
 ///
 /// let invalid = UnindexedSignature {
 ///     algorithm: SignatureAlgorithm::Ed25519,
@@ -98,8 +98,8 @@ pub struct ParsedUnindexedSignature {
 /// pinned reference.
 ///
 /// ```
-/// use signify_cesr::indexer::IndexerCode;
-/// use signify_crypto::signature::IndexedSignature;
+/// use keri_cesr::indexer::IndexerCode;
+/// use keri_cesr::crypto::signature::IndexedSignature;
 ///
 /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
 /// let signature = IndexedSignature::from_raw(
@@ -118,7 +118,7 @@ pub struct ParsedUnindexedSignature {
 /// Invalid indexed-signature state cannot be assembled directly:
 ///
 /// ```compile_fail
-/// use signify_crypto::signature::IndexedSignature;
+/// use keri_cesr::crypto::signature::IndexedSignature;
 ///
 /// let invalid = IndexedSignature {
 ///     material: (),
@@ -754,7 +754,6 @@ const fn indexed_algorithm_name(algorithm: IndexedSignatureAlgorithm) -> &'stati
         IndexedSignatureAlgorithm::EcdsaSecp256k1 => "secp256k1 ECDSA",
         IndexedSignatureAlgorithm::EcdsaSecp256r1 => "P-256 ECDSA/SHA-256",
         IndexedSignatureAlgorithm::Ed448 => "Ed448",
-        _ => "unknown indexed-signature algorithm",
     }
 }
 
@@ -776,7 +775,7 @@ fn reject_trailing(context: &'static str, total: usize, consumed: usize) -> Resu
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::verifier::KeyTransferability;
+    use crate::crypto::verifier::KeyTransferability;
 
     const ED25519_QB64: &str =
         "0BB43fz0GkIj6INCvq732d7FBZxt3Gw08S1mak9TeRgStsrxiUPEKcMAP9SlJrt6sg5h2pEvTshrYz56rM8IIzcO";

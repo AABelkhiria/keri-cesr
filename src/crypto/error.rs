@@ -2,7 +2,7 @@
 
 use std::{error::Error, fmt};
 
-use signify_cesr::CesrError;
+use crate::CesrError;
 
 /// Errors produced while validating or operating on cryptographic material.
 ///

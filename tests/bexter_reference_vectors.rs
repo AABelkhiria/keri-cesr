@@ -2,8 +2,8 @@
 
 use std::error::Error;
 
+use keri_cesr::{CesrError, bexter::Base64Text, code::DerivationCode, matter::QualifiedMaterial};
 use serde::Deserialize;
-use signify_cesr::{CesrError, bexter::Base64Text, code::DerivationCode, matter::QualifiedMaterial};
 
 const REFERENCE_SHA: &str = "ae92eceb8e776ad57669707bff7f84db9390b711";
 
@@ -85,7 +85,7 @@ struct RejectedCase {
 fn fixture() -> Result<Fixture, serde_json::Error> {
     serde_json::from_str(include_str!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../../fixtures/cesr-bexter/v1.json"
+        "/fixtures/cesr-bexter/v1.json"
     )))
 }
 

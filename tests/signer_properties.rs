@@ -1,18 +1,20 @@
 //! Property and invalid-near-miss coverage for private Ed25519 signers.
 
-use proptest::{prelude::*, test_runner::TestCaseError};
-use signify_cesr::{code::DerivationCode, indexer::IndexerCode, matter::QualifiedMaterial};
-use signify_crypto::{
+#![cfg(feature = "crypto")]
+
+use keri_cesr::crypto::{
     CryptoError,
     signer::{SignaturePlacement, Signer},
     verifier::KeyTransferability,
 };
+use keri_cesr::{code::DerivationCode, indexer::IndexerCode, matter::QualifiedMaterial};
+use proptest::{prelude::*, test_runner::TestCaseError};
 
 fn value<T>(result: Result<T, CryptoError>) -> Result<T, TestCaseError> {
     result.map_err(|error| TestCaseError::fail(error.to_string()))
 }
 
-fn cesr_value<T>(result: Result<T, signify_cesr::CesrError>) -> Result<T, TestCaseError> {
+fn cesr_value<T>(result: Result<T, keri_cesr::CesrError>) -> Result<T, TestCaseError> {
     result.map_err(|error| TestCaseError::fail(error.to_string()))
 }
 

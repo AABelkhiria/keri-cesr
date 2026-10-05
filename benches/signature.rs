@@ -3,8 +3,8 @@
 use std::hint::black_box;
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_cesr::indexer::IndexerCode;
-use signify_crypto::signature::{IndexedSignature, SignatureAlgorithm, UnindexedSignature};
+use keri_cesr::crypto::signature::{IndexedSignature, SignatureAlgorithm, UnindexedSignature};
+use keri_cesr::indexer::IndexerCode;
 
 const ED25519_QB64: &str = "0BB43fz0GkIj6INCvq732d7FBZxt3Gw08S1mak9TeRgStsrxiUPEKcMAP9SlJrt6sg5h2pEvTshrYz56rM8IIzcO";
 const INDEXED_ED25519_QB64: &str =

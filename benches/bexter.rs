@@ -3,7 +3,7 @@
 use std::hint::black_box;
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_cesr::bexter::Base64Text;
+use keri_cesr::bexter::Base64Text;
 
 fn benchmark_bexter(criterion: &mut Criterion) {
     let path = "-a-field0-1";

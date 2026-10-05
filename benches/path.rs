@@ -3,7 +3,7 @@
 use std::hint::black_box;
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_cesr::path::SadPath;
+use keri_cesr::path::SadPath;
 
 fn benchmark_path(criterion: &mut Criterion) {
     criterion.bench_function("path_construct_four_components", |bencher| {

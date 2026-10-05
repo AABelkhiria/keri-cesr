@@ -1,10 +1,10 @@
 //! Property and invalid-near-miss coverage for CESR SAD paths.
 
-use proptest::{prelude::*, test_runner::TestCaseError};
-use signify_cesr::{
+use keri_cesr::{
     CesrError,
     path::{PathComponent, SadPath},
 };
+use proptest::{prelude::*, test_runner::TestCaseError};
 
 fn test_value<T>(result: Result<T, CesrError>) -> Result<T, TestCaseError> {
     result.map_err(|error| TestCaseError::fail(error.to_string()))

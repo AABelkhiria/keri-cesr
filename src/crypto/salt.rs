@@ -7,15 +7,15 @@
 
 use std::{error::Error, fmt};
 
-use argon2id_p1::{Algorithm, Argon2, Block, Params, Version};
-use signify_cesr::{
+use crate::{
     CesrError,
     code::DerivationCode,
     matter::{ParsedMaterial, QualifiedMaterial},
 };
+use argon2id_p1::{Algorithm, Argon2, Block, Params, Version};
 use zeroize::Zeroizing;
 
-use crate::{
+use crate::crypto::{
     CryptoError,
     signer::{ED25519_SEED_SIZE, Signer},
     verifier::KeyTransferability,
@@ -99,7 +99,7 @@ impl From<SecurityTier> for KeyDerivationProfile {
 /// constructor input remains the caller's responsibility.
 ///
 /// ```
-/// use signify_crypto::{
+/// use keri_cesr::crypto::{
 ///     salt::{KeyDerivationProfile, Salt, SecurityTier},
 ///     verifier::KeyTransferability,
 /// };
@@ -120,7 +120,7 @@ impl From<SecurityTier> for KeyDerivationProfile {
 /// Secret state cannot be assembled or accessed directly:
 ///
 /// ```compile_fail
-/// use signify_crypto::salt::{Salt, SecurityTier};
+/// use keri_cesr::crypto::salt::{Salt, SecurityTier};
 ///
 /// let salt = Salt { raw: [0_u8; 16], tier: SecurityTier::Low };
 /// let leaked = salt.raw;
@@ -129,7 +129,7 @@ impl From<SecurityTier> for KeyDerivationProfile {
 /// Salt values cannot be cloned accidentally:
 ///
 /// ```compile_fail
-/// use signify_crypto::salt::{Salt, SecurityTier};
+/// use keri_cesr::crypto::salt::{Salt, SecurityTier};
 ///
 /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
 /// let salt = Salt::from_raw(b"0123456789abcdef", SecurityTier::Low)?;

@@ -3,7 +3,7 @@
 use std::hint::black_box;
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_crypto::digest::{Digest, DigestAlgorithm};
+use keri_cesr::crypto::digest::{Digest, DigestAlgorithm};
 
 fn benchmark_digest(criterion: &mut Criterion) {
     let serialization = [0x5a_u8; 1_024];

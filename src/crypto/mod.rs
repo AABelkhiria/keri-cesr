@@ -1,7 +1,5 @@
 //! Signing, verification, digest, key derivation, and encryption operations.
 
-#![forbid(unsafe_code)]
-
 pub mod cipher;
 pub mod digest;
 pub mod error;

@@ -6,13 +6,13 @@
 
 use std::{fmt, str::FromStr};
 
-use signify_cesr::{
+use crate::{
     CesrError,
     code::{CodeFamily, DerivationCode},
     matter::{ParsedMaterial, QualifiedMaterial},
 };
 
-use crate::CryptoError;
+use crate::crypto::CryptoError;
 
 /// Raw byte width of every currently supported digest.
 pub const DIGEST_RAW_SIZE: usize = blake3::OUT_LEN;
@@ -61,7 +61,7 @@ impl TryFrom<DerivationCode> for DigestAlgorithm {
 /// constant time through the audited BLAKE3 hash type.
 ///
 /// ```
-/// use signify_crypto::digest::{Digest, DigestAlgorithm};
+/// use keri_cesr::crypto::digest::{Digest, DigestAlgorithm};
 ///
 /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
 /// let serialization = b"abcdefghijklmnopqrstuvwxyz0123456789";
@@ -76,7 +76,7 @@ impl TryFrom<DerivationCode> for DigestAlgorithm {
 /// Invalid digest state cannot be assembled directly:
 ///
 /// ```compile_fail
-/// use signify_crypto::digest::{Digest, DigestAlgorithm};
+/// use keri_cesr::crypto::digest::{Digest, DigestAlgorithm};
 ///
 /// let invalid = Digest {
 ///     algorithm: DigestAlgorithm::Blake3_256,

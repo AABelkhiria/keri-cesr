@@ -125,7 +125,7 @@ impl IndexerCodeSize {
 /// parsing.
 ///
 /// ```compile_fail
-/// use signify_cesr::indexer::IndexerCode;
+/// use keri_cesr::indexer::IndexerCode;
 ///
 /// let invalid = IndexerCode("A");
 /// ```

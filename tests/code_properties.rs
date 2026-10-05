@@ -1,7 +1,7 @@
 //! Property and invalid-near-miss coverage for CESR derivation codes.
 
+use keri_cesr::code::DerivationCode;
 use proptest::prelude::*;
-use signify_cesr::code::DerivationCode;
 
 fn derivation_code() -> impl Strategy<Value = DerivationCode> {
     proptest::sample::select(DerivationCode::ALL.to_vec())

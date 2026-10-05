@@ -1,22 +1,48 @@
 [package]
-name = "signify-cesr"
+name = "keri-cesr"
 version = "0.0.0"
-description = "CESR primitives for Signify"
-edition.workspace = true
-rust-version.workspace = true
-publish.workspace = true
-keywords.workspace = true
-categories.workspace = true
+description = "CESR primitives and KERI cryptography"
+edition = "2024"
+rust-version = "1.97"
+publish = false
+license = "Apache-2.0"
+keywords = ["keri", "cesr", "identity", "cryptography"]
+categories = ["cryptography", "encoding"]
+
+[features]
+default = []
+crypto = [
+    "dep:argon2id-p1",
+    "dep:blake3",
+    "dep:ed25519-dalek",
+    "dep:getrandom",
+    "dep:nacl-sealed-box",
+    "dep:p256",
+    "dep:rand_core",
+    "dep:subtle",
+]
 
 [dependencies]
-base64.workspace = true
-zeroize.workspace = true
+base64 = { version = "0.23.0", default-features = false, features = ["std"] }
+zeroize = { version = "1.9.0", default-features = false, features = ["alloc"] }
+
+argon2id-p1 = { version = "0.1.0", default-features = false, features = ["zeroize"], optional = true }
+blake3 = { version = "1.8.6", default-features = false, optional = true }
+ed25519-dalek = { version = "3.0.0", default-features = false, features = ["zeroize"], optional = true }
+getrandom = { version = "0.3.4", default-features = false, features = ["std"], optional = true }
+nacl-sealed-box = { version = "0.2.0", default-features = false, optional = true }
+p256 = { version = "0.14.0", default-features = false, features = ["ecdsa"], optional = true }
+rand_core = { version = "0.10.1", default-features = false, optional = true }
+subtle = { version = "2.6.1", default-features = false, optional = true }
 
 [dev-dependencies]
-criterion.workspace = true
-proptest.workspace = true
-serde.workspace = true
-serde_json.workspace = true
+criterion = { version = "0.8.2", default-features = false, features = ["cargo_bench_support"] }
+proptest = { version = "1.11.0", default-features = false, features = ["std"] }
+serde = { version = "=1.0.228", features = ["derive"] }
+serde_json = { version = "1.0.151", default-features = false, features = ["std"] }
+
+[package.metadata.docs.rs]
+all-features = true
 
 [[bench]]
 name = "foundations"
@@ -54,5 +80,53 @@ harness = false
 name = "path"
 harness = false
 
-[lints]
-workspace = true
+[[bench]]
+name = "digest"
+harness = false
+required-features = ["crypto"]
+
+[[bench]]
+name = "verifier"
+harness = false
+required-features = ["crypto"]
+
+[[bench]]
+name = "signature"
+harness = false
+required-features = ["crypto"]
+
+[[bench]]
+name = "signer"
+harness = false
+required-features = ["crypto"]
+
+[[bench]]
+name = "salt"
+harness = false
+required-features = ["crypto"]
+
+[[bench]]
+name = "cipher"
+harness = false
+required-features = ["crypto"]
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+unreachable_pub = "warn"
+unused_must_use = "deny"
+
+[lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "deny", priority = -1 }
+cargo = { level = "deny", priority = -1 }
+allow_attributes = "deny"
+dbg_macro = "deny"
+expect_used = "deny"
+indexing_slicing = "deny"
+panic = "deny"
+print_stderr = "deny"
+print_stdout = "deny"
+todo = "deny"
+unimplemented = "deny"
+unwrap_used = "deny"

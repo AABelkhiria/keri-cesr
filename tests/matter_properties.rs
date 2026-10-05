@@ -1,11 +1,11 @@
 //! Property and invalid-near-miss coverage for qualified CESR material.
 
-use proptest::{prelude::*, test_runner::TestCaseError};
-use signify_cesr::{
+use keri_cesr::{
     CesrError,
     code::DerivationCode,
     matter::{ParsedMaterial, QualifiedMaterial},
 };
+use proptest::{prelude::*, test_runner::TestCaseError};
 
 fn variable_code() -> impl Strategy<Value = DerivationCode> {
     proptest::sample::select(

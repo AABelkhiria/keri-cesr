@@ -3,7 +3,7 @@
 use std::hint::black_box;
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_cesr::number::CesrNumber;
+use keri_cesr::number::CesrNumber;
 
 fn benchmark_number(criterion: &mut Criterion) {
     criterion.bench_function("number_construct_u128_max", |bencher| {

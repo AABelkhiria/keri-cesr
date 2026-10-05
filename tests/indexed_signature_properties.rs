@@ -1,8 +1,10 @@
 //! Property and invalid-near-miss coverage for CESR indexed signatures.
 
+#![cfg(feature = "crypto")]
+
+use keri_cesr::crypto::{CryptoError, signature::IndexedSignature};
+use keri_cesr::indexer::{IndexedSignatureAlgorithm, IndexedSignatureScope, IndexerCode};
 use proptest::{prelude::*, test_runner::TestCaseError};
-use signify_cesr::indexer::{IndexedSignatureAlgorithm, IndexedSignatureScope, IndexerCode};
-use signify_crypto::{CryptoError, signature::IndexedSignature};
 
 fn code() -> impl Strategy<Value = IndexerCode> {
     prop_oneof![

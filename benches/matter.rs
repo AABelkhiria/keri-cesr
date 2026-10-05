@@ -3,7 +3,7 @@
 use std::hint::black_box;
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_cesr::{code::DerivationCode, matter::QualifiedMaterial};
+use keri_cesr::{code::DerivationCode, matter::QualifiedMaterial};
 
 fn benchmark_matter(criterion: &mut Criterion) {
     let raw_32 = [0x5a_u8; 32];

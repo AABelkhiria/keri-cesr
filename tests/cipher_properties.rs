@@ -1,8 +1,8 @@
 //! Property and invalid-near-miss coverage for CESR-qualified ciphertext.
 
-use proptest::{prelude::*, test_runner::TestCaseError};
-use signify_cesr::{code::DerivationCode, matter::QualifiedMaterial};
-use signify_crypto::{
+#![cfg(feature = "crypto")]
+
+use keri_cesr::crypto::{
     CryptoError,
     cipher::{
         Ciphertext, CiphertextKind, Encrypter, SALT_CIPHERTEXT_RAW_SIZE, SEED_CIPHERTEXT_RAW_SIZE,
@@ -12,6 +12,8 @@ use signify_crypto::{
     signer::Signer,
     verifier::KeyTransferability,
 };
+use keri_cesr::{code::DerivationCode, matter::QualifiedMaterial};
+use proptest::{prelude::*, test_runner::TestCaseError};
 
 fn cipher_value<T>(result: Result<T, CryptoError>) -> Result<T, TestCaseError> {
     result.map_err(|error| TestCaseError::fail(error.to_string()))

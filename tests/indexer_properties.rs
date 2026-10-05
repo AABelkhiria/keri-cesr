@@ -1,10 +1,10 @@
 //! Property and invalid-near-miss coverage for indexed CESR material.
 
-use proptest::{prelude::*, test_runner::TestCaseError};
-use signify_cesr::{
+use keri_cesr::{
     CesrError,
     indexer::{IndexedMaterial, IndexedSignatureScope, IndexerCode},
 };
+use proptest::{prelude::*, test_runner::TestCaseError};
 
 fn fixed_code() -> impl Strategy<Value = IndexerCode> {
     proptest::sample::select(

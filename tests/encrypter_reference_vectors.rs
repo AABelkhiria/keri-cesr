@@ -1,14 +1,16 @@
 //! Exact encrypter and Rust-to-TypeScript sealed-box interoperability fixtures.
 
+#![cfg(feature = "crypto")]
+
 use std::error::Error;
 
-use serde::Deserialize;
-use signify_cesr::{code::DerivationCode, matter::QualifiedMaterial};
-use signify_crypto::{
+use keri_cesr::crypto::{
     CryptoError,
     cipher::{Ciphertext, CiphertextKind, Encrypter},
     verifier::VerificationKey,
 };
+use keri_cesr::{code::DerivationCode, matter::QualifiedMaterial};
+use serde::Deserialize;
 
 const REFERENCE_SHA: &str = "ae92eceb8e776ad57669707bff7f84db9390b711";
 
@@ -83,7 +85,7 @@ struct PublicKeyQuirk {
 fn fixture() -> Result<Fixture, serde_json::Error> {
     serde_json::from_str(include_str!(concat!(
         env!("CARGO_MANIFEST_DIR"),
-        "/../../fixtures/crypto-encrypter/v1.json"
+        "/fixtures/crypto-encrypter/v1.json"
     )))
 }
 

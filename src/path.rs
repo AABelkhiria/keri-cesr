@@ -37,7 +37,7 @@ pub struct PathComponent {
 /// Qualified Base64 bytes are the attachment-path representation consumed by later KERI framing.
 ///
 /// ```
-/// use signify_cesr::{CesrError, path::SadPath};
+/// use keri_cesr::{CesrError, path::SadPath};
 ///
 /// # fn main() -> Result<(), CesrError> {
 /// let path = SadPath::from_components(["e", "credential", "0"])?;

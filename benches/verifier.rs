@@ -3,7 +3,7 @@
 use std::hint::black_box;
 
 use criterion::{Criterion, criterion_group, criterion_main};
-use signify_crypto::verifier::VerificationKey;
+use keri_cesr::crypto::verifier::VerificationKey;
 
 const MESSAGE: &[u8] = b"abcdefghijklmnopqrstuvwxyz0123456789";
 const ED25519_QB64: &str = "DAOhB7_zzhC-HXDdGOdLwJln5NYwm6UNXx3chmQSVTG4";

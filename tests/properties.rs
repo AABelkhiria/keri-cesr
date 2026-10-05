@@ -1,11 +1,11 @@
 //! Property and invalid-near-miss coverage for CESR foundation helpers.
 
-use proptest::prelude::*;
-use signify_cesr::{
+use keri_cesr::{
     CesrError,
     base64::{decode_u64, decode_url_safe, encode_u64, encode_url_safe},
     bytes::{bytes_to_integer, integer_to_bytes},
 };
+use proptest::prelude::*;
 
 proptest! {
     #[test]

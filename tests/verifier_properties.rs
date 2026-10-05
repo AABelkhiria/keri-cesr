@@ -1,10 +1,12 @@
 //! Property and invalid-near-miss coverage for CESR-qualified verification keys.
 
-use proptest::{prelude::*, test_runner::TestCaseError};
-use signify_crypto::{
+#![cfg(feature = "crypto")]
+
+use keri_cesr::crypto::{
     CryptoError,
     verifier::{KeyTransferability, VerificationAlgorithm, VerificationKey},
 };
+use proptest::{prelude::*, test_runner::TestCaseError};
 
 const MESSAGE: &[u8] = b"abcdefghijklmnopqrstuvwxyz0123456789";
 const ED25519_RAW: [u8; 32] = [

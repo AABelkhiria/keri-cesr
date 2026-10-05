@@ -29,7 +29,7 @@ pub const MAX_BASE64_TEXT_CHARS: usize = (MAX_RAW_MATERIAL_BYTES / 3) * 4 + (MAX
 /// encode as `4AABABBB`.
 ///
 /// ```
-/// use signify_cesr::{CesrError, bexter::Base64Text};
+/// use keri_cesr::{CesrError, bexter::Base64Text};
 ///
 /// # fn main() -> Result<(), CesrError> {
 /// let text = Base64Text::new("-A-B")?;

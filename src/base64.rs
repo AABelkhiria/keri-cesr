@@ -22,7 +22,7 @@ pub const MAX_U64_B64_DIGITS: usize = 11;
 /// RFC 4648.
 ///
 /// ```
-/// use signify_cesr::base64::encode_url_safe;
+/// use keri_cesr::base64::encode_url_safe;
 ///
 /// assert_eq!(encode_url_safe(b"fish"), "ZmlzaA");
 /// ```
@@ -42,7 +42,7 @@ pub fn encode_url_safe(input: &[u8]) -> String {
 /// Returns [`CesrError`] for malformed, non-canonical, or oversized input.
 ///
 /// ```
-/// use signify_cesr::{CesrError, base64::decode_url_safe};
+/// use keri_cesr::{CesrError, base64::decode_url_safe};
 ///
 /// # fn main() -> Result<(), CesrError> {
 /// assert_eq!(decode_url_safe("Zg==")?, b"f");
@@ -109,7 +109,7 @@ pub fn decode_url_safe_bounded(input: &str, maximum_decoded_length: usize) -> Re
 /// value is requested with zero width.
 ///
 /// ```
-/// use signify_cesr::{CesrError, base64::{decode_u64, encode_u64}};
+/// use keri_cesr::{CesrError, base64::{decode_u64, encode_u64}};
 ///
 /// # fn main() -> Result<(), CesrError> {
 /// let encoded = encode_u64(6_011, 1)?;

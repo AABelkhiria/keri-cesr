@@ -1,10 +1,12 @@
 //! Property tests for salt qualification and deterministic signer derivation.
 
-use proptest::prelude::*;
-use signify_crypto::{
+#![cfg(feature = "crypto")]
+
+use keri_cesr::crypto::{
     salt::{KeyDerivationProfile, MAX_DERIVATION_PATH_BYTES, Salt, SecurityTier},
     verifier::KeyTransferability,
 };
+use proptest::prelude::*;
 
 fn tier(value: u8) -> SecurityTier {
     match value % 3 {

@@ -6,15 +6,15 @@
 
 use std::{fmt, str::FromStr};
 
-use ed25519_dalek::{Signature as Ed25519Signature, VerifyingKey as Ed25519VerifyingKey};
-use p256::ecdsa::{Signature as P256Signature, VerifyingKey as P256VerifyingKey, signature::Verifier};
-use signify_cesr::{
+use crate::{
     CesrError,
     code::DerivationCode,
     matter::{ParsedMaterial, QualifiedMaterial},
 };
+use ed25519_dalek::{Signature as Ed25519Signature, VerifyingKey as Ed25519VerifyingKey};
+use p256::ecdsa::{Signature as P256Signature, VerifyingKey as P256VerifyingKey, signature::Verifier};
 
-use crate::CryptoError;
+use crate::crypto::CryptoError;
 
 /// Raw byte width of an Ed25519 public verification key.
 pub const ED25519_PUBLIC_KEY_SIZE: usize = 32;
@@ -111,7 +111,7 @@ impl VerificationMaterial {
 /// explicit full-message hashing.
 ///
 /// ```
-/// use signify_crypto::verifier::VerificationKey;
+/// use keri_cesr::crypto::verifier::VerificationKey;
 ///
 /// # fn main() -> Result<(), Box<dyn std::error::Error>> {
 /// let key = VerificationKey::from_qb64(
@@ -134,7 +134,7 @@ impl VerificationMaterial {
 /// Invalid verification-key state cannot be assembled directly:
 ///
 /// ```compile_fail
-/// use signify_crypto::verifier::{KeyTransferability, VerificationKey};
+/// use keri_cesr::crypto::verifier::{KeyTransferability, VerificationKey};
 ///
 /// let invalid = VerificationKey {
 ///     transferability: KeyTransferability::Transferable,

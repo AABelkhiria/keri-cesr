@@ -1,10 +1,10 @@
 //! Property and invalid-near-miss coverage for CESR counters.
 
-use proptest::{prelude::*, test_runner::TestCaseError};
-use signify_cesr::{
+use keri_cesr::{
     CesrError,
     counter::{Counter, CounterCode, CounterVersion},
 };
+use proptest::{prelude::*, test_runner::TestCaseError};
 
 fn counter_code() -> impl Strategy<Value = CounterCode> {
     proptest::sample::select(CounterCode::ALL.to_vec())
