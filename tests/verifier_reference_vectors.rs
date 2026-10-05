@@ -259,8 +259,8 @@ fn reference_rejections_map_to_typed_or_completed_rust_behavior() -> Result<(), 
     let fixture = fixture()?;
     let first = fixture.cases.first().ok_or("verifier fixture has no successful case")?;
     for case in &fixture.rejected_cases {
-        assert!(!case.reference_error_category.is_empty());
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_category, "");
+        assert_ne!(case.reference_error_message, "");
         let category = match case.name.as_str() {
             "unsupported_secp256k1" => {
                 let material = QualifiedMaterial::new(DerivationCode::ECDSA_256K1, &[2_u8; P256_PUBLIC_KEY_SIZE])?;
@@ -373,8 +373,8 @@ fn malformed_signatures_and_invalid_keys_are_strictly_handled() -> Result<(), Bo
 
 fn assert_invalid_key_quirk(quirk: &InvalidKeyQuirk, algorithm: VerificationAlgorithm) -> Result<(), Box<dyn Error>> {
     assert!(!quirk.verification_result);
-    assert!(!quirk.qb64.is_empty());
-    assert!(!quirk.rust_decision.is_empty());
+    assert_ne!(quirk.qb64, "");
+    assert_ne!(quirk.rust_decision, "");
     let raw = decode_hex(&quirk.raw_hex)?;
     let error = VerificationKey::from_raw(algorithm, KeyTransferability::Transferable, &raw)
         .err()
@@ -423,11 +423,10 @@ fn decode_hex(input: &str) -> Result<Vec<u8>, Box<dyn Error>> {
     }
     input
         .as_bytes()
-        .chunks_exact(2)
-        .map(|pair| match pair {
-            [high, low] => Ok((decode_nibble(*high)? << 4) | decode_nibble(*low)?),
-            _ => Err("hex fixture chunk did not contain two bytes".into()),
-        })
+        .as_chunks::<2>()
+        .0
+        .iter()
+        .map(|[high, low]| Ok((decode_nibble(*high)? << 4) | decode_nibble(*low)?))
         .collect()
 }
 

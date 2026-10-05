@@ -117,7 +117,7 @@ fn fixture_metadata_is_pinned_and_records_binary_derivation() -> Result<(), Box<
 #[test]
 fn upstream_sequence_cases_match_exact_outputs_and_reverse_qb64() -> Result<(), Box<dyn Error>> {
     for case in fixture()?.cases {
-        assert!(!case.name.is_empty());
+        assert_ne!(case.name, "");
         assert!(matches!(case.input_kind.as_str(), "default" | "hex" | "number"));
         let sequence = SequenceNumber::from_hex(&case.value_hex)?;
         assert_eq!(sequence.code(), case.code.parse::<DerivationCode>()?);
@@ -139,8 +139,8 @@ fn exact_raw_vectors_cover_the_full_fixed_width() -> Result<(), Box<dyn Error>> 
     let cases = fixture()?.exact_raw_cases;
     assert_eq!(cases.len(), 3);
     for case in cases {
-        assert!(!case.name.is_empty());
-        assert!(!case.observed_reference_snh.is_empty());
+        assert_ne!(case.name, "");
+        assert_ne!(case.observed_reference_snh, "");
         let raw = decode_hex(&case.raw_hex)?;
         assert_eq!(raw.len(), SEQUENCE_RAW_SIZE);
         let sequence = SequenceNumber::from_hex(&case.value_hex)?;
@@ -162,18 +162,18 @@ fn javascript_coercion_and_partial_parse_quirks_are_not_reproduced() -> Result<(
         quirks.positive_infinity,
     ] {
         assert_eq!(coercion.input_kind, "number");
-        assert!(!coercion.input.is_empty());
-        assert!(!coercion.observed_snh.is_empty());
+        assert_ne!(coercion.input, "");
+        assert_ne!(coercion.observed_snh, "");
         assert_eq!(decode_hex(&coercion.raw_hex)?.len(), SEQUENCE_RAW_SIZE);
-        assert!(!coercion.qb64.is_empty());
+        assert_ne!(coercion.qb64, "");
         assert_eq!(coercion.rust_error_category, "Unrepresentable");
     }
 
     for partial in [quirks.partial_hex, quirks.prefixed_hex] {
         assert_eq!(partial.input_kind, "hex");
-        assert!(!partial.observed_snh.is_empty());
+        assert_ne!(partial.observed_snh, "");
         assert_eq!(decode_hex(&partial.raw_hex)?.len(), SEQUENCE_RAW_SIZE);
-        assert!(!partial.qb64.is_empty());
+        assert_ne!(partial.qb64, "");
         let error = SequenceNumber::from_hex(&partial.input)
             .err()
             .ok_or("partial hexadecimal sequence input was accepted")?;
@@ -202,7 +202,7 @@ fn reference_rejections_and_rust_qb2_completion_are_recorded() -> Result<(), Box
     let zero = SequenceNumber::ZERO;
     for case in fixture()?.rejected_cases {
         assert_eq!(case.reference_error_category, "Error");
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_message, "");
         match case.name.as_str() {
             "wrong_code" => {
                 let material = QualifiedMaterial::new(DerivationCode::SHORT_NUMBER, &[0_u8; 2])?;
@@ -245,7 +245,9 @@ fn decode_hex(input: &str) -> Result<Vec<u8>, Box<dyn Error>> {
     }
     input
         .as_bytes()
-        .chunks_exact(2)
+        .as_chunks::<2>()
+        .0
+        .iter()
         .map(|pair| {
             let high = pair.first().copied().ok_or("missing high hex digit")?;
             let low = pair.get(1).copied().ok_or("missing low hex digit")?;

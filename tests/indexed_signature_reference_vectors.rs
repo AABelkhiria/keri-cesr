@@ -160,8 +160,8 @@ fn reference_rejections_map_to_typed_or_completed_rust_behavior() -> Result<(), 
     let fixture = fixture()?;
     let first = fixture.cases.first().ok_or("indexed-signature fixture has no case")?;
     for case in &fixture.rejected_cases {
-        assert!(!case.reference_error_category.is_empty());
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_category, "");
+        assert_ne!(case.reference_error_message, "");
         let category = match case.name.as_str() {
             "short_ed25519_signature" => crypto_error_category(
                 &IndexedSignature::from_raw(IndexerCode::ED25519, 0, None, &[0_u8; 63])
@@ -275,11 +275,10 @@ fn decode_hex(input: &str) -> Result<Vec<u8>, Box<dyn Error>> {
     }
     input
         .as_bytes()
-        .chunks_exact(2)
-        .map(|pair| match pair {
-            [high, low] => Ok((decode_nibble(*high)? << 4) | decode_nibble(*low)?),
-            _ => Err("hex fixture chunk was not two bytes".into()),
-        })
+        .as_chunks::<2>()
+        .0
+        .iter()
+        .map(|[high, low]| Ok((decode_nibble(*high)? << 4) | decode_nibble(*low)?))
         .collect()
 }
 

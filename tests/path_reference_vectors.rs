@@ -192,8 +192,8 @@ fn stream_and_ambiguous_reference_behaviors_are_explicit_divergences() -> Result
     ));
 
     for case in fixture.reference_quirks.component_edges {
-        assert!(!case.observed_text.is_empty());
-        assert!(!case.qb64.is_empty());
+        assert_ne!(case.observed_text, "");
+        assert_ne!(case.qb64, "");
         match case.name.as_str() {
             "internal_identity_component" => {
                 assert_eq!(case.rust_error_category, "Matched");
@@ -215,7 +215,7 @@ fn stream_and_ambiguous_reference_behaviors_are_explicit_divergences() -> Result
     }
 
     let missing = fixture.reference_quirks.missing_leader_text;
-    assert!(!missing.qb64.is_empty());
+    assert_ne!(missing.qb64, "");
     assert_eq!(missing.path_getter_error_category, "Error");
     let error = SadPath::from_text(&missing.input)
         .err()
@@ -228,8 +228,8 @@ fn stream_and_ambiguous_reference_behaviors_are_explicit_divergences() -> Result
 fn reference_rejections_and_rust_qb2_completion_are_recorded() -> Result<(), Box<dyn Error>> {
     let fixture = fixture()?;
     for case in &fixture.rejected_cases {
-        assert!(!case.reference_error_category.is_empty());
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_category, "");
+        assert_ne!(case.reference_error_message, "");
         match case.name.as_str() {
             "missing_path" => assert_eq!(case.rust_error_category, "Unrepresentable"),
             "invalid_dollar_component" => assert_rejected_component("Not$Base64", case)?,
@@ -276,17 +276,15 @@ fn error_category(error: &CesrError) -> &'static str {
 }
 
 fn decode_hex(input: &str) -> Result<Vec<u8>, Box<dyn Error>> {
-    let mut chunks = input.as_bytes().chunks_exact(2);
-    let decoded = chunks
-        .by_ref()
+    let (pairs, remainder) = input.as_bytes().as_chunks::<2>();
+    if !remainder.is_empty() {
+        return Err("odd-length hexadecimal fixture".into());
+    }
+    pairs
+        .iter()
         .map(|chunk| {
             let text = std::str::from_utf8(chunk)?;
             Ok(u8::from_str_radix(text, 16)?)
         })
-        .collect::<Result<Vec<_>, Box<dyn Error>>>()?;
-    if chunks.remainder().is_empty() {
-        Ok(decoded)
-    } else {
-        Err("odd-length hexadecimal fixture".into())
-    }
+        .collect()
 }

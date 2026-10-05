@@ -213,15 +213,15 @@ fn every_reference_semantic_version_form_matches() -> Result<(), Box<dyn Error>>
 fn permissive_or_unfinished_reference_paths_are_strictly_diverged() -> Result<(), Box<dyn Error>> {
     let quirks = fixture()?.reference_quirks;
     let qb2 = quirks.qb2_constructor;
-    assert!(qb2.parsed_code.is_empty());
+    assert_eq!(qb2.parsed_code, "");
     assert_eq!(qb2.parsed_count, -1);
     assert_eq!(qb2.reencode_error.category, "TypeError");
-    assert!(!qb2.reencode_error.message.is_empty());
+    assert_ne!(qb2.reencode_error.message, "");
     let valid = Counter::new(CounterCode::CONTROLLER_INDEXED_SIGNATURES, 5)?;
     assert_eq!(Counter::from_qb2(&valid.qb2()?)?, valid);
 
     for case in [quirks.permissive_version_prefix, quirks.extra_version_component] {
-        assert!(!case.reference_qb64_digits.is_empty());
+        assert_ne!(case.reference_qb64_digits, "");
         let error = case
             .input
             .parse::<CounterVersion>()
@@ -244,7 +244,7 @@ fn permissive_or_unfinished_reference_paths_are_strictly_diverged() -> Result<()
 fn reference_rejections_map_to_stable_rust_failures() -> Result<(), Box<dyn Error>> {
     for case in fixture()?.rejected_cases {
         assert_eq!(case.reference_error_category, "Error");
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_message, "");
         if case.name == "negative_count" {
             assert_eq!(case.rust_error_category, "Unrepresentable");
             continue;
@@ -298,7 +298,9 @@ fn decode_hex(input: &str) -> Result<Vec<u8>, Box<dyn Error>> {
     }
     input
         .as_bytes()
-        .chunks_exact(2)
+        .as_chunks::<2>()
+        .0
+        .iter()
         .map(|pair| {
             let high = pair.first().copied().ok_or("missing high hex digit")?;
             let low = pair.get(1).copied().ok_or("missing low hex digit")?;

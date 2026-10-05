@@ -188,8 +188,8 @@ fn stream_and_truncation_quirks_are_explicit_safe_divergences() -> Result<(), Bo
 
     let truncated = fixture.reference_quirks.truncated_qb64_acceptance;
     assert_eq!(truncated.observed_code, "4A");
-    assert!(truncated.observed_raw_hex.is_empty());
-    assert!(truncated.observed_canonical_text.is_empty());
+    assert_eq!(truncated.observed_raw_hex, "");
+    assert_eq!(truncated.observed_canonical_text, "");
     assert_eq!(truncated.reencode_error_category, "RangeError");
     let error = Base64Text::from_qb64(&truncated.input)
         .err()
@@ -202,8 +202,8 @@ fn stream_and_truncation_quirks_are_explicit_safe_divergences() -> Result<(), Bo
 fn reference_rejections_and_rust_qb2_completion_are_recorded() -> Result<(), Box<dyn Error>> {
     let fixture = fixture()?;
     for case in &fixture.rejected_cases {
-        assert!(!case.reference_error_category.is_empty());
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_category, "");
+        assert_ne!(case.reference_error_message, "");
         match case.name.as_str() {
             "missing_text" => assert_eq!(case.rust_error_category, "Unrepresentable"),
             "invalid_alphabet" => assert_rejected_text("@!", case)?,
@@ -256,17 +256,15 @@ fn error_category(error: &CesrError) -> &'static str {
 }
 
 fn decode_hex(input: &str) -> Result<Vec<u8>, Box<dyn Error>> {
-    let mut chunks = input.as_bytes().chunks_exact(2);
-    let decoded = chunks
-        .by_ref()
+    let (pairs, remainder) = input.as_bytes().as_chunks::<2>();
+    if !remainder.is_empty() {
+        return Err("odd-length hexadecimal fixture".into());
+    }
+    pairs
+        .iter()
         .map(|chunk| {
             let text = std::str::from_utf8(chunk)?;
             Ok(u8::from_str_radix(text, 16)?)
         })
-        .collect::<Result<Vec<_>, Box<dyn Error>>>()?;
-    if chunks.remainder().is_empty() {
-        Ok(decoded)
-    } else {
-        Err("odd-length hexadecimal fixture".into())
-    }
+        .collect()
 }

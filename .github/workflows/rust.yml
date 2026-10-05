@@ -19,9 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          components: clippy,rustfmt
+      - run: rustup toolchain install
       - uses: taiki-e/install-action@cargo-hack
       - uses: Swatinem/rust-cache@v2
       - run: cargo fmt --all -- --check
@@ -39,9 +37,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@nightly
-      - uses: taiki-e/install-action@cargo-fuzz
+      - run: rustup toolchain install nightly-2026-08-03 --profile minimal
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: fuzz
-      - run: cargo +nightly fuzz build
+      - run: cargo +nightly-2026-08-03 install cargo-fuzz --version 0.13.2 --locked
+      - run: cargo +nightly-2026-08-03 fuzz build

@@ -153,8 +153,8 @@ fn exact_rust_ciphertexts_are_recorded_as_reference_accepted() -> Result<(), Box
 fn reference_rejections_and_safe_divergences_are_typed() -> Result<(), Box<dyn Error>> {
     let fixture = fixture()?;
     for case in fixture.rejected_cases {
-        assert!(!case.reference_error_category.is_empty());
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_category, "");
+        assert_ne!(case.reference_error_message, "");
         match case.name.as_str() {
             "empty_encrypter" => assert!(Encrypter::from_qb64("").is_err()),
             "p256_verifier" => {
@@ -199,7 +199,9 @@ fn decode_hex(input: &str) -> Result<Vec<u8>, Box<dyn Error>> {
     }
     input
         .as_bytes()
-        .chunks_exact(2)
+        .as_chunks::<2>()
+        .0
+        .iter()
         .map(|pair| {
             let text = std::str::from_utf8(pair)?;
             Ok(u8::from_str_radix(text, 16)?)

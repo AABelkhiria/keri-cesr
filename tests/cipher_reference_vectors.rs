@@ -162,8 +162,8 @@ fn reference_rejections_map_to_typed_or_safe_rust_behavior() -> Result<(), Box<d
     let fixture = fixture()?;
     let first_case = fixture.cases.first().ok_or("cipher fixture has no successful case")?;
     for case in &fixture.rejected_cases {
-        assert!(!case.reference_error_category.is_empty());
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_category, "");
+        assert_ne!(case.reference_error_message, "");
         let category = match case.name.as_str() {
             "empty_material" => {
                 crypto_error_category(&Ciphertext::from_qb64("").err().ok_or("empty ciphertext was accepted")?)
@@ -226,7 +226,7 @@ fn defective_reference_quirks_are_strictly_diverged() -> Result<(), Box<dyn Erro
     assert_eq!(reference_retained.len(), SALT_CIPHERTEXT_RAW_SIZE);
     assert_eq!(Ciphertext::from_qb64(&seed.qb64)?.kind(), CiphertextKind::QualifiedSalt);
     assert_eq!(seed.rust_code, "P");
-    assert!(!seed.rust_decision.is_empty());
+    assert_ne!(seed.rust_decision, "");
     let rust_inferred = Ciphertext::infer_from_raw(&seed_input)?;
     assert_eq!(rust_inferred.kind(), CiphertextKind::QualifiedSeed);
     assert_eq!(rust_inferred.raw(), seed_input);
@@ -263,11 +263,10 @@ fn decode_hex(input: &str) -> Result<Vec<u8>, Box<dyn Error>> {
     }
     input
         .as_bytes()
-        .chunks_exact(2)
-        .map(|pair| match pair {
-            [high, low] => Ok((decode_nibble(*high)? << 4) | decode_nibble(*low)?),
-            _ => Err("hex fixture chunk did not contain two bytes".into()),
-        })
+        .as_chunks::<2>()
+        .0
+        .iter()
+        .map(|[high, low]| Ok((decode_nibble(*high)? << 4) | decode_nibble(*low)?))
         .collect()
 }
 

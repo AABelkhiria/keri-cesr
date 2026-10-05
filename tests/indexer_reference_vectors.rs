@@ -198,7 +198,7 @@ fn reference_stream_prefix_behavior_maps_to_explicit_parser() -> Result<(), Box<
 fn reference_rejections_map_to_stable_rust_errors() -> Result<(), Box<dyn Error>> {
     for case in fixture()?.rejected_cases {
         assert_eq!(case.reference_error_category, "Error");
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_message, "");
         let error = rejected_case_error(&case.name)?;
         assert_eq!(error_category(&error), case.rust_error_category);
     }
@@ -262,21 +262,18 @@ fn deterministic_raw(length: usize, salt: usize) -> Result<Vec<u8>, std::num::Tr
 }
 
 fn decode_hex(input: &str) -> Result<Vec<u8>, Box<dyn Error>> {
-    let mut chunks = input.as_bytes().chunks_exact(2);
-    let decoded = chunks
-        .by_ref()
-        .map(|pair| {
-            let hi = pair.first().copied().ok_or("missing high hexadecimal digit")?;
-            let lo = pair.get(1).copied().ok_or("missing low hexadecimal digit")?;
+    let (pairs, remainder) = input.as_bytes().as_chunks::<2>();
+    if !remainder.is_empty() {
+        return Err("odd hexadecimal fixture length".into());
+    }
+    pairs
+        .iter()
+        .map(|&[hi, lo]| {
             let hi = hex_digit(hi).ok_or("invalid high hexadecimal digit")?;
             let lo = hex_digit(lo).ok_or("invalid low hexadecimal digit")?;
             Ok((hi << 4) | lo)
         })
-        .collect::<Result<Vec<_>, Box<dyn Error>>>()?;
-    if !chunks.remainder().is_empty() {
-        return Err("odd hexadecimal fixture length".into());
-    }
-    Ok(decoded)
+        .collect()
 }
 
 fn hex_digit(byte: u8) -> Option<u8> {

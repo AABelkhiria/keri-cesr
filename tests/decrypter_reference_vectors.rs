@@ -133,7 +133,7 @@ fn fixture_metadata_matches_the_pinned_reference() -> Result<(), Box<dyn Error>>
     assert_eq!(fixture.schema_version, 1);
     assert_eq!(fixture.upstream, "https://github.com/WebOfTrust/signify-ts.git");
     assert_eq!(fixture.reference_sha, REFERENCE_SHA);
-    assert!(!fixture.generated_on.is_empty());
+    assert_ne!(fixture.generated_on, "");
     assert!(
         fixture
             .sources
@@ -187,7 +187,7 @@ fn signer_seed_qb64(seed: &[u8]) -> Result<String, CryptoError> {
     let signer = Signer::from_seed(seed, KeyTransferability::Transferable)?;
     // The qualified seed itself is deterministic public fixture material here.
     let verifier_check = signer.verifier().qb64()?;
-    assert!(!verifier_check.is_empty());
+    assert_ne!(verifier_check, "");
     let requalified = keri_cesr::matter::QualifiedMaterial::new(keri_cesr::code::DerivationCode::ED25519_SEED, seed)?;
     Ok(requalified.qb64()?)
 }
@@ -288,8 +288,8 @@ fn reference_rejections_map_to_stable_rust_error_categories() -> Result<(), Box<
     let private_raw = decode_hex(&fixture.conversion.x25519_private_raw_hex)?;
 
     for case in &fixture.rejected_cases {
-        assert!(!case.reference_error_category.is_empty());
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_category, "");
+        assert_ne!(case.reference_error_message, "");
         match case.name.as_str() {
             "empty_decrypter" => {
                 assert_eq!(case.rust_error_category, "Cesr");
@@ -359,7 +359,7 @@ fn reference_quirks_are_pinned_and_safely_diverged() -> Result<(), Box<dyn Error
     assert!(excess.truncated_to_reference_key);
     assert_eq!(excess.reference_qb64, fixture.conversion.decrypter_qb64);
     assert_eq!(excess.rust_error_category, "Cesr");
-    assert!(!excess.rust_decision.is_empty());
+    assert_ne!(excess.rust_decision, "");
     let excess_raw = decode_hex(&excess.input_raw_hex)?;
     assert_eq!(excess_raw.len(), X25519_PRIVATE_KEY_SIZE + 1);
     assert!(matches!(
@@ -371,8 +371,8 @@ fn reference_quirks_are_pinned_and_safely_diverged() -> Result<(), Box<dyn Error
     let dispatch = &quirks.data_driven_kind_dispatch;
     assert_eq!(dispatch.salt_cipher_decrypts_to_code, "0A");
     assert_eq!(dispatch.rust_error_category, "CiphertextKindMismatch");
-    assert!(!dispatch.note.is_empty());
-    assert!(!dispatch.rust_decision.is_empty());
+    assert_ne!(dispatch.note, "");
+    assert_ne!(dispatch.rust_decision, "");
     let salt_stored = fixture
         .stored_reference_ciphertexts
         .iter()
@@ -390,8 +390,8 @@ fn reference_quirks_are_pinned_and_safely_diverged() -> Result<(), Box<dyn Error
     // Distinguishable failure stages upstream collapse into one Rust error category.
     let stages = &quirks.distinguishable_failure_stages;
     assert_eq!(stages.wrong_shape_cipher_code, "P");
-    assert!(!stages.note.is_empty());
-    assert!(!stages.rust_decision.is_empty());
+    assert_ne!(stages.note, "");
+    assert_ne!(stages.rust_decision, "");
     assert_eq!(stages.wrong_shape_error.rust_error_category, "DecryptionFailed");
     assert_ne!(
         stages.wrong_shape_error.reference_error_message,

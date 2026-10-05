@@ -182,8 +182,8 @@ fn reference_rejections_map_to_typed_or_unrepresentable_failures() -> Result<(),
     let fixture = fixture()?;
     let first_case = fixture.cases.first().ok_or("digest fixture has no successful case")?;
     for case in &fixture.rejected_cases {
-        assert!(!case.reference_error_category.is_empty());
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_category, "");
+        assert_ne!(case.reference_error_message, "");
         let category = match case.name.as_str() {
             "missing_material_without_serialization" => "Unrepresentable",
             "short_raw_without_serialization" => crypto_error_category(
@@ -225,7 +225,7 @@ fn defective_reference_quirks_are_strictly_diverged() -> Result<(), Box<dyn Erro
     ] {
         assert!(!quirk.reference_result);
         assert!(quirk.rust_result);
-        assert!(!quirk.rust_decision.is_empty());
+        assert_ne!(quirk.rust_decision, "");
         assert_eq!(digest.compare(serialization, &digest), quirk.rust_result);
     }
     assert!(!quirks.compare_different_same_algorithm.reference_result);
@@ -244,7 +244,7 @@ fn defective_reference_quirks_are_strictly_diverged() -> Result<(), Box<dyn Erro
 
     let fallback = quirks.invalid_raw_falls_back_to_serialization;
     assert_eq!(fallback.invalid_raw_length, DIGEST_RAW_SIZE - 1);
-    assert!(!fallback.rust_decision.is_empty());
+    assert_ne!(fallback.rust_decision, "");
     let fallback_serialization = decode_hex(&fallback.serialization_hex)?;
     assert_eq!(
         Digest::derive(DigestAlgorithm::Blake3_256, &fallback_serialization).qb64()?,
@@ -257,7 +257,7 @@ fn defective_reference_quirks_are_strictly_diverged() -> Result<(), Box<dyn Erro
     assert!(encoded.unsupported_digest_verifies_with_blake3);
     assert_eq!(encoded.non_digest_code, "D");
     assert!(encoded.non_digest_verifies_with_blake3);
-    assert!(!encoded.rust_decision.is_empty());
+    assert_ne!(encoded.rust_decision, "");
     let unsupported = Digest::from_qb64(&encoded.unsupported_digest_qb64)
         .err()
         .ok_or("encoded unsupported digest algorithm was accepted")?;
@@ -291,11 +291,10 @@ fn decode_hex(input: &str) -> Result<Vec<u8>, Box<dyn Error>> {
     }
     input
         .as_bytes()
-        .chunks_exact(2)
-        .map(|pair| match pair {
-            [high, low] => Ok((decode_nibble(*high)? << 4) | decode_nibble(*low)?),
-            _ => Err("hex fixture chunk did not contain two bytes".into()),
-        })
+        .as_chunks::<2>()
+        .0
+        .iter()
+        .map(|[high, low]| Ok((decode_nibble(*high)? << 4) | decode_nibble(*low)?))
         .collect()
 }
 

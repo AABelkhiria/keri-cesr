@@ -179,7 +179,7 @@ fn fixture_metadata_and_cost_profiles_are_pinned() -> Result<(), Box<dyn Error>>
 #[test]
 fn every_reference_derivation_and_signature_matches_exactly() -> Result<(), Box<dyn Error>> {
     for case in fixture()?.cases {
-        assert!(!case.name.is_empty());
+        assert_ne!(case.name, "");
         let raw = decode_hex(&case.salt_raw_hex)?;
         let qb64_bytes = decode_hex(&case.salt_qb64_bytes_hex)?;
         let qb2 = decode_hex(&case.salt_qb2_hex)?;
@@ -237,8 +237,8 @@ fn reference_rejections_map_to_typed_or_unrepresentable_rust_behavior() -> Resul
     let raw = decode_hex(&first.salt_raw_hex)?;
     let qb2 = decode_hex(&first.salt_qb2_hex)?;
     for case in fixture.rejected_cases {
-        assert!(!case.reference_error_category.is_empty());
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_category, "");
+        assert_ne!(case.reference_error_message, "");
         let category = match case.name.as_str() {
             "short_salt" => {
                 let short = raw.get(..15).ok_or("fixture salt is shorter than 15 bytes")?;
@@ -348,7 +348,7 @@ fn decode_hex(input: &str) -> Result<Vec<u8>, Box<dyn Error>> {
         return Err("hex input has odd length".into());
     }
     let mut output = Vec::with_capacity(input.len() / 2);
-    for pair in input.as_bytes().chunks_exact(2) {
+    for pair in input.as_bytes().as_chunks::<2>().0 {
         let text = std::str::from_utf8(pair)?;
         output.push(u8::from_str_radix(text, 16)?);
     }

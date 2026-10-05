@@ -134,7 +134,7 @@ fn fixture_metadata_is_pinned_and_marks_seed_as_public_test_material() -> Result
 #[test]
 fn all_reference_signer_outputs_match_exactly() -> Result<(), Box<dyn Error>> {
     for case in fixture()?.cases {
-        assert!(!case.name.is_empty());
+        assert_ne!(case.name, "");
         assert_eq!(case.seed_code, "A");
         let seed = decode_hex(&case.seed_raw_hex)?;
         let seed_qb64_bytes = decode_hex(&case.seed_qb64_bytes_hex)?;
@@ -208,8 +208,8 @@ fn reference_rejections_map_to_typed_or_completed_rust_behavior() -> Result<(), 
     let first = fixture.cases.first().ok_or("signer fixture has no case")?;
     let seed = decode_hex(&first.seed_raw_hex)?;
     for case in &fixture.rejected_cases {
-        assert!(!case.reference_error_category.is_empty());
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_category, "");
+        assert_ne!(case.reference_error_message, "");
         let category = match case.name.as_str() {
             "short_ed25519_seed" => {
                 let short = seed.get(..31).ok_or("fixture seed is shorter than 31 bytes")?;
@@ -327,11 +327,10 @@ fn decode_hex(input: &str) -> Result<Vec<u8>, Box<dyn Error>> {
     }
     input
         .as_bytes()
-        .chunks_exact(2)
-        .map(|pair| match pair {
-            [high, low] => Ok((decode_nibble(*high)? << 4) | decode_nibble(*low)?),
-            _ => Err("hex fixture chunk was not two bytes".into()),
-        })
+        .as_chunks::<2>()
+        .0
+        .iter()
+        .map(|[high, low]| Ok((decode_nibble(*high)? << 4) | decode_nibble(*low)?))
         .collect()
 }
 

@@ -134,7 +134,7 @@ fn fixture_metadata_is_pinned_and_records_binary_limitation() -> Result<(), Box<
 #[test]
 fn reference_number_construction_matches_exact_outputs() -> Result<(), Box<dyn Error>> {
     for case in fixture()?.cases {
-        assert!(!case.name.is_empty());
+        assert_ne!(case.name, "");
         assert!(matches!(
             case.input_kind.as_str(),
             "default" | "hex" | "number" | "number_expression"
@@ -171,7 +171,7 @@ fn exact_matter_vectors_cover_all_numeric_boundaries() -> Result<(), Box<dyn Err
     let cases = fixture()?.exact_material_cases;
     assert_eq!(cases.len(), 8);
     for case in cases {
-        assert!(!case.name.is_empty());
+        assert_ne!(case.name, "");
         let number = CesrNumber::from_hex(&case.value_hex)?;
         assert_eq!(number.code(), case.code.parse::<DerivationCode>()?);
         assert_eq!(number.raw()?, decode_hex(&case.raw_hex)?);
@@ -185,16 +185,16 @@ fn exact_matter_vectors_cover_all_numeric_boundaries() -> Result<(), Box<dyn Err
 fn coercion_and_partial_parse_quirks_are_strictly_diverged() -> Result<(), Box<dyn Error>> {
     let quirks = fixture()?.reference_quirks;
     for coercion in [quirks.negative_number, quirks.fractional_number] {
-        assert!(!coercion.input.is_empty());
-        assert!(!coercion.value_hex.is_empty());
-        assert!(!coercion.code.is_empty());
-        assert!(!coercion.qb64.is_empty());
+        assert_ne!(coercion.input, "");
+        assert_ne!(coercion.value_hex, "");
+        assert_ne!(coercion.code, "");
+        assert_ne!(coercion.qb64, "");
         assert_eq!(coercion.rust_error_category, "Unrepresentable");
     }
 
     for case in [quirks.partial_hex, quirks.prefixed_hex] {
-        assert!(!case.value_hex.is_empty());
-        assert!(!case.qb64.is_empty());
+        assert_ne!(case.value_hex, "");
+        assert_ne!(case.qb64, "");
         let error = CesrNumber::from_hex(&case.input)
             .err()
             .ok_or("partial hexadecimal input was accepted")?;
@@ -235,7 +235,7 @@ fn reference_rejections_and_rust_encoded_completion_are_recorded() -> Result<(),
     let one = CesrNumber::new(1);
     for case in fixture()?.rejected_cases {
         assert_eq!(case.reference_error_category, "Error");
-        assert!(!case.reference_error_message.is_empty());
+        assert_ne!(case.reference_error_message, "");
         match case.name.as_str() {
             "invalid_hex" => {
                 let error = CesrNumber::from_hex("zz")
@@ -270,7 +270,9 @@ fn decode_hex(input: &str) -> Result<Vec<u8>, Box<dyn Error>> {
     }
     input
         .as_bytes()
-        .chunks_exact(2)
+        .as_chunks::<2>()
+        .0
+        .iter()
         .map(|pair| {
             let high = pair.first().copied().ok_or("missing high hex digit")?;
             let low = pair.get(1).copied().ok_or("missing low hex digit")?;
