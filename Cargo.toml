@@ -1,13 +1,16 @@
 [package]
 name = "keri-cesr"
-version = "0.0.0"
+version = "0.1.0"
 description = "CESR primitives and KERI cryptography"
 edition = "2024"
 rust-version = "1.97"
-publish = false
 license = "Apache-2.0 OR MIT"
+repository = "https://github.com/AABelkhiria/keri-cesr"
+documentation = "https://docs.rs/keri-cesr"
+readme = "README.md"
 keywords = ["keri", "cesr", "identity", "cryptography"]
 categories = ["cryptography", "encoding"]
+exclude = [".github/", "tools/", "deny.toml", "rustfmt.toml", "rust-toolchain.toml", ".gitignore"]
 
 [features]
 default = []
