@@ -2,8 +2,8 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-import { decodeBase64Url } from '../../reference/signify-ts/dist/keri/core/base64.js';
-import { Matter } from '../../reference/signify-ts/dist/keri/core/matter.js';
+import { decodeBase64Url } from './node_modules/signify-ts/dist/keri/core/base64.js';
+import { Matter } from './node_modules/signify-ts/dist/keri/core/matter.js';
 
 const referenceSha = 'ae92eceb8e776ad57669707bff7f84db9390b711';
 

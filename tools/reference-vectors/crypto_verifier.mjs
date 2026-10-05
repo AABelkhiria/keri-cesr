@@ -2,11 +2,11 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
-import libsodium from "../../reference/signify-ts/node_modules/libsodium-wrappers-sumo/dist/modules-sumo-esm/libsodium-wrappers.mjs";
-import { p256 } from "../../reference/signify-ts/node_modules/@noble/curves/esm/p256.js";
-import { decodeBase64Url } from "../../reference/signify-ts/dist/keri/core/base64.js";
-import { MtrDex } from "../../reference/signify-ts/dist/keri/core/matter.js";
-import { Verfer } from "../../reference/signify-ts/dist/keri/core/verfer.js";
+import libsodium from "./node_modules/libsodium-wrappers-sumo/dist/modules-sumo-esm/libsodium-wrappers.mjs";
+import { p256 } from "./node_modules/@noble/curves/esm/p256.js";
+import { decodeBase64Url } from "./node_modules/signify-ts/dist/keri/core/base64.js";
+import { MtrDex } from "./node_modules/signify-ts/dist/keri/core/matter.js";
+import { Verfer } from "./node_modules/signify-ts/dist/keri/core/verfer.js";
 
 await libsodium.ready;
 

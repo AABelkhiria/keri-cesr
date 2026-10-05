@@ -5,15 +5,15 @@ import { fileURLToPath } from 'node:url';
 import {
     decodeBase64Url,
     encodeBase64Url,
-} from '../../reference/signify-ts/dist/keri/core/base64.js';
+} from './node_modules/signify-ts/dist/keri/core/base64.js';
 import {
     b64ToInt,
     intToB64,
-} from '../../reference/signify-ts/dist/keri/core/core.js';
+} from './node_modules/signify-ts/dist/keri/core/core.js';
 import {
     bytesToInt,
     intToBytes,
-} from '../../reference/signify-ts/dist/keri/core/utils.js';
+} from './node_modules/signify-ts/dist/keri/core/utils.js';
 
 const referenceSha = 'ae92eceb8e776ad57669707bff7f84db9390b711';
 

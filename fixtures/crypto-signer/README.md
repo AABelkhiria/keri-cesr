@@ -5,7 +5,7 @@
 - Exact commit: `ae92eceb8e776ad57669707bff7f84db9390b711`.
 - Generated: 2026-08-12.
 - Generator: `node tools/reference-vectors/crypto_signer.mjs` from the repository root after
-  `npm --prefix reference/signify-ts run build`.
+  `npm ci --prefix tools/reference-vectors`.
 - Upstream sources: `src/keri/core/{signer,matter,verfer,cigar,siger,indexer}.ts` and
   `test/core/signer.test.ts`.
 

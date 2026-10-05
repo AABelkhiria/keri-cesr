@@ -11,11 +11,10 @@ These fixtures cover Base64, six-bit integer, and big-endian byte/integer behavi
 - Binary encoding in `v1.json`: JSON arrays of unsigned decimal bytes
 - Integer encoding in `v1.json`: decimal strings, avoiding JSON number-width ambiguity
 
-Generate from the workspace root:
+Generate from the repository root:
 
 ```bash
-npm --prefix reference/signify-ts ci --ignore-scripts
-npm --prefix reference/signify-ts run build
+npm ci --prefix tools/reference-vectors
 node tools/reference-vectors/cesr_foundations.mjs
 ```
 

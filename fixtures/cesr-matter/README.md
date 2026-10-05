@@ -9,7 +9,7 @@
 - Reference tests: `test/core/matter.test.ts`, with variable construction examples corroborated by
   `test/core/bexter.test.ts`
 
-Run `npm run build` in `reference/signify-ts`, then run the generator from the Rust workspace root.
+Run `npm ci --prefix tools/reference-vectors`, then run the generator from the repository root.
 The generator uses deterministic arithmetic byte sequences and records raw and qualified-binary
 fields as lowercase hexadecimal. `qb64` is emitted directly by the pinned `Matter` implementation.
 Because that implementation explicitly rejects `qb2` input, `qb2_hex` is derived from its exact

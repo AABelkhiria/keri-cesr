@@ -2,13 +2,13 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
-import { decodeBase64Url } from "../../reference/signify-ts/dist/keri/core/base64.js";
-import { Cigar } from "../../reference/signify-ts/dist/keri/core/cigar.js";
-import { IdrDex } from "../../reference/signify-ts/dist/keri/core/indexer.js";
-import { MtrDex } from "../../reference/signify-ts/dist/keri/core/matter.js";
-import { Siger } from "../../reference/signify-ts/dist/keri/core/siger.js";
-import { Signer } from "../../reference/signify-ts/dist/keri/core/signer.js";
-import libsodium from "../../reference/signify-ts/node_modules/libsodium-wrappers-sumo/dist/modules-sumo-esm/libsodium-wrappers.mjs";
+import { decodeBase64Url } from "./node_modules/signify-ts/dist/keri/core/base64.js";
+import { Cigar } from "./node_modules/signify-ts/dist/keri/core/cigar.js";
+import { IdrDex } from "./node_modules/signify-ts/dist/keri/core/indexer.js";
+import { MtrDex } from "./node_modules/signify-ts/dist/keri/core/matter.js";
+import { Siger } from "./node_modules/signify-ts/dist/keri/core/siger.js";
+import { Signer } from "./node_modules/signify-ts/dist/keri/core/signer.js";
+import libsodium from "./node_modules/libsodium-wrappers-sumo/dist/modules-sumo-esm/libsodium-wrappers.mjs";
 
 await libsodium.ready;
 

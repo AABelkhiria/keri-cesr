@@ -11,7 +11,7 @@
 After building the pinned checkout, reproduce and compare the fixture from the repository root:
 
 ```bash
-npm --prefix reference/signify-ts run build
+npm ci --prefix tools/reference-vectors
 node tools/reference-vectors/crypto_encrypter.mjs --check
 ```
 

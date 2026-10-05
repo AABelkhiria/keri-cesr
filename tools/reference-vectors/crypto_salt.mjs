@@ -2,12 +2,12 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
-import { decodeBase64Url } from "../../reference/signify-ts/dist/keri/core/base64.js";
-import { Cigar } from "../../reference/signify-ts/dist/keri/core/cigar.js";
-import { MtrDex } from "../../reference/signify-ts/dist/keri/core/matter.js";
-import { Salter, Tier } from "../../reference/signify-ts/dist/keri/core/salter.js";
-import { Signer } from "../../reference/signify-ts/dist/keri/core/signer.js";
-import libsodium from "../../reference/signify-ts/node_modules/libsodium-wrappers-sumo/dist/modules-sumo-esm/libsodium-wrappers.mjs";
+import { decodeBase64Url } from "./node_modules/signify-ts/dist/keri/core/base64.js";
+import { Cigar } from "./node_modules/signify-ts/dist/keri/core/cigar.js";
+import { MtrDex } from "./node_modules/signify-ts/dist/keri/core/matter.js";
+import { Salter, Tier } from "./node_modules/signify-ts/dist/keri/core/salter.js";
+import { Signer } from "./node_modules/signify-ts/dist/keri/core/signer.js";
+import libsodium from "./node_modules/libsodium-wrappers-sumo/dist/modules-sumo-esm/libsodium-wrappers.mjs";
 
 await libsodium.ready;
 

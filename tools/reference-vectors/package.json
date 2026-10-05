@@ -1,0 +1,14 @@
+{
+  "name": "keri-cesr-reference-vectors",
+  "private": true,
+  "type": "module",
+  "description": "Generators for the cross-language fixtures under fixtures/, run against a pinned signify-ts.",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@noble/curves": "1.9.7",
+    "libsodium-wrappers-sumo": "0.8.4",
+    "signify-ts": "git+https://github.com/WebOfTrust/signify-ts.git#91a04a5edd804425f42be75ffbf034f8d14e5cb2"
+  }
+}

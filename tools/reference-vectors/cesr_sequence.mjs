@@ -2,12 +2,12 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
-import { decodeBase64Url } from "../../reference/signify-ts/dist/keri/core/base64.js";
+import { decodeBase64Url } from "./node_modules/signify-ts/dist/keri/core/base64.js";
 import {
   MtrDex,
   NumDex,
-} from "../../reference/signify-ts/dist/keri/core/matter.js";
-import { Seqner } from "../../reference/signify-ts/dist/keri/core/seqner.js";
+} from "./node_modules/signify-ts/dist/keri/core/matter.js";
+import { Seqner } from "./node_modules/signify-ts/dist/keri/core/seqner.js";
 
 const referenceSha = "ae92eceb8e776ad57669707bff7f84db9390b711";
 

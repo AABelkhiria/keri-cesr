@@ -1,14 +1,14 @@
 // Generates and checks X25519 decrypter vectors against the compiled pinned signify-ts checkout.
 import { readFileSync, writeFileSync } from "node:fs";
 
-import { Cipher } from "../../reference/signify-ts/dist/keri/core/cipher.js";
-import { b } from "../../reference/signify-ts/dist/keri/core/core.js";
-import { Decrypter } from "../../reference/signify-ts/dist/keri/core/decrypter.js";
-import { Encrypter } from "../../reference/signify-ts/dist/keri/core/encrypter.js";
-import { Matter, MtrDex } from "../../reference/signify-ts/dist/keri/core/matter.js";
-import { Salter } from "../../reference/signify-ts/dist/keri/core/salter.js";
-import { Signer } from "../../reference/signify-ts/dist/keri/core/signer.js";
-import libsodium from "../../reference/signify-ts/node_modules/libsodium-wrappers-sumo/dist/modules-sumo-esm/libsodium-wrappers.mjs";
+import { Cipher } from "./node_modules/signify-ts/dist/keri/core/cipher.js";
+import { b } from "./node_modules/signify-ts/dist/keri/core/core.js";
+import { Decrypter } from "./node_modules/signify-ts/dist/keri/core/decrypter.js";
+import { Encrypter } from "./node_modules/signify-ts/dist/keri/core/encrypter.js";
+import { Matter, MtrDex } from "./node_modules/signify-ts/dist/keri/core/matter.js";
+import { Salter } from "./node_modules/signify-ts/dist/keri/core/salter.js";
+import { Signer } from "./node_modules/signify-ts/dist/keri/core/signer.js";
+import libsodium from "./node_modules/libsodium-wrappers-sumo/dist/modules-sumo-esm/libsodium-wrappers.mjs";
 
 await libsodium.ready;
 

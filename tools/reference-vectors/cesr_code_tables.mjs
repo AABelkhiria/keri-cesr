@@ -10,7 +10,7 @@ import {
     NonTransDex,
     NumDex,
     Sizage,
-} from '../../reference/signify-ts/dist/keri/core/matter.js';
+} from './node_modules/signify-ts/dist/keri/core/matter.js';
 
 const referenceSha = 'ae92eceb8e776ad57669707bff7f84db9390b711';
 

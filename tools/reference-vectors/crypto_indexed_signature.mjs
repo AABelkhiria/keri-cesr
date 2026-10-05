@@ -2,10 +2,10 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
-import { decodeBase64Url } from "../../reference/signify-ts/dist/keri/core/base64.js";
-import { IdrDex } from "../../reference/signify-ts/dist/keri/core/indexer.js";
-import { Siger } from "../../reference/signify-ts/dist/keri/core/siger.js";
-import { Verfer } from "../../reference/signify-ts/dist/keri/core/verfer.js";
+import { decodeBase64Url } from "./node_modules/signify-ts/dist/keri/core/base64.js";
+import { IdrDex } from "./node_modules/signify-ts/dist/keri/core/indexer.js";
+import { Siger } from "./node_modules/signify-ts/dist/keri/core/siger.js";
+import { Verfer } from "./node_modules/signify-ts/dist/keri/core/verfer.js";
 
 const referenceSha = "ae92eceb8e776ad57669707bff7f84db9390b711";
 const raw64 = Uint8Array.from({ length: 64 }, (_, index) => index);

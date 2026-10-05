@@ -16,7 +16,7 @@ Upstream evidence:
 Generate from the repository root after building the pinned checkout:
 
 ```bash
-npm --prefix reference/signify-ts run build
+npm ci --prefix tools/reference-vectors
 node tools/reference-vectors/crypto_indexed_signature.mjs
 ```
 
