@@ -84,4 +84,9 @@ cargo +nightly fuzz run matter
 
 ## License
 
-Apache-2.0. See [`LICENSE`](LICENSE).
+Either of
+
+- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE))
+- MIT license ([LICENSE-MIT](LICENSE-MIT))
+
+at your option. Contributions are dual licensed the same way unless you say otherwise.

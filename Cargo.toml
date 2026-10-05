@@ -5,7 +5,7 @@ description = "CESR primitives and KERI cryptography"
 edition = "2024"
 rust-version = "1.97"
 publish = false
-license = "Apache-2.0"
+license = "Apache-2.0 OR MIT"
 keywords = ["keri", "cesr", "identity", "cryptography"]
 categories = ["cryptography", "encoding"]
 
