@@ -17,7 +17,7 @@ use crate::crypto::CryptoError;
 /// Raw byte width of every currently supported digest.
 pub const DIGEST_RAW_SIZE: usize = blake3::OUT_LEN;
 
-/// A digest algorithm supported by the pinned Signify reference.
+/// A digest algorithm supported by the pinned signify-ts reference.
 ///
 /// This enum is non-exhaustive so later reference-supported algorithms can be added without making
 /// downstream exhaustive matches part of the compatibility contract.

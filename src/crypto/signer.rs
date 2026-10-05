@@ -29,7 +29,7 @@ const SMALL_INDEX_MAXIMUM: u32 = 63;
 
 type SecretSourceError = Box<dyn Error + Send + Sync>;
 
-/// A private signing algorithm supported by the pinned Signify reference.
+/// A private signing algorithm supported by the pinned signify-ts reference.
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
 #[non_exhaustive]
 pub enum SigningAlgorithm {

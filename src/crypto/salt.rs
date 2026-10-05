@@ -26,8 +26,9 @@ pub const SALT_SIZE: usize = 16;
 
 /// Maximum accepted deterministic derivation-path length in UTF-8 bytes.
 ///
-/// Signify paths are short labels and numeric components. The explicit ceiling bounds hashing
-/// work on caller-controlled text while remaining far above all pinned reference uses.
+/// Derivation paths used by signify-ts are short labels and numeric components. The explicit
+/// ceiling bounds hashing work on caller-controlled text while remaining far above all pinned
+/// reference uses.
 pub const MAX_DERIVATION_PATH_BYTES: usize = 4_096;
 
 const ARGON2ID_NAME: &str = "Argon2id v1.3";
@@ -35,7 +36,7 @@ const ARGON2_PARALLELISM: u32 = 1;
 
 type SecretSourceError = Box<dyn Error + Send + Sync>;
 
-/// Standard security tiers defined by the pinned Signify reference.
+/// Standard security tiers defined by the pinned signify-ts reference.
 #[derive(Clone, Copy, Debug, Default, Eq, Hash, PartialEq)]
 #[non_exhaustive]
 pub enum SecurityTier {
@@ -57,7 +58,7 @@ pub enum SecurityTier {
 pub enum KeyDerivationProfile {
     /// Insecure test profile: one iteration and 8 KiB of memory.
     Temporary,
-    /// One of the standard Signify security tiers.
+    /// One of the standard signify-ts security tiers.
     Standard(SecurityTier),
 }
 
@@ -93,10 +94,10 @@ impl From<SecurityTier> for KeyDerivationProfile {
 
 /// A non-cloneable, redacted 128-bit salt for deterministic private-key derivation.
 ///
-/// The salt is treated as secret because Signify commonly constructs it from a passcode. It does
-/// not implement `Clone`, equality, `Display`, or serialization. Explicit CESR export methods
-/// return zeroizing buffers so callers can persist or encrypt the value when required. Borrowed
-/// constructor input remains the caller's responsibility.
+/// The salt is treated as secret because clients such as signify-ts commonly derive it from a
+/// passcode. It does not implement `Clone`, equality, `Display`, or serialization. Explicit CESR
+/// export methods return zeroizing buffers so callers can persist or encrypt the value when
+/// required. Borrowed constructor input remains the caller's responsibility.
 ///
 /// ```
 /// use keri_cesr::crypto::{

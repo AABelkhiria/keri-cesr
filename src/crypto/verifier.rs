@@ -23,7 +23,7 @@ pub const P256_PUBLIC_KEY_SIZE: usize = 33;
 /// Raw byte width of both supported detached-signature encodings.
 pub const SIGNATURE_SIZE: usize = 64;
 
-/// A public-key verification algorithm supported by Signify.
+/// A public-key verification algorithm supported by the pinned signify-ts reference.
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
 #[non_exhaustive]
 pub enum VerificationAlgorithm {
