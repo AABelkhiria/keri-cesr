@@ -9,10 +9,10 @@ import { MtrDex } from "./node_modules/signify-ts/dist/keri/core/matter.js";
 import { Siger } from "./node_modules/signify-ts/dist/keri/core/siger.js";
 import { Signer } from "./node_modules/signify-ts/dist/keri/core/signer.js";
 import libsodium from "./node_modules/libsodium-wrappers-sumo/dist/modules-sumo-esm/libsodium-wrappers.mjs";
+import { referenceSha } from "./reference.mjs";
 
 await libsodium.ready;
 
-const referenceSha = "ae92eceb8e776ad57669707bff7f84db9390b711";
 const seed = Uint8Array.from({ length: 32 }, (_, index) => index);
 const serialization = new TextEncoder().encode(
   "abcdefghijklmnopqrstuvwxyz0123456789",

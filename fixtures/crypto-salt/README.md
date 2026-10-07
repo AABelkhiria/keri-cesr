@@ -2,7 +2,7 @@
 
 - Schema: `v1.json`, schema version 1.
 - Upstream: `https://github.com/WebOfTrust/signify-ts.git`.
-- Exact commit: `ae92eceb8e776ad57669707bff7f84db9390b711`.
+- Exact commit: `91a04a5edd804425f42be75ffbf034f8d14e5cb2`.
 - Generated: 2026-08-13.
 - Generator: `node tools/reference-vectors/crypto_salt.mjs` from the repository root after
   `npm ci --prefix tools/reference-vectors`.

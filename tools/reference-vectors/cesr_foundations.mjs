@@ -14,8 +14,7 @@ import {
     bytesToInt,
     intToBytes,
 } from './node_modules/signify-ts/dist/keri/core/utils.js';
-
-const referenceSha = 'ae92eceb8e776ad57669707bff7f84db9390b711';
+import { referenceSha } from './reference.mjs';
 
 function padded(value) {
     return value + '='.repeat((4 - (value.length % 4)) % 4);

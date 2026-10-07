@@ -2,7 +2,7 @@
 
 - Fixture schema: `v1`
 - Upstream: `https://github.com/WebOfTrust/signify-ts.git`
-- Commit: `ae92eceb8e776ad57669707bff7f84db9390b711`
+- Commit: `91a04a5edd804425f42be75ffbf034f8d14e5cb2`
 - Generated: 2026-08-04
 - Sources: `src/keri/core/counter.ts`, `test/core/counter.test.ts`
 - Binary fields: lowercase hexadecimal; qualified text is canonical unpadded URL-safe Base64.

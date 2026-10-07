@@ -5,8 +5,8 @@ import { fileURLToPath } from "node:url";
 import { decodeBase64Url } from "./node_modules/signify-ts/dist/keri/core/base64.js";
 import { Cipher } from "./node_modules/signify-ts/dist/keri/core/cipher.js";
 import { Matter, MtrDex } from "./node_modules/signify-ts/dist/keri/core/matter.js";
+import { referenceSha } from "./reference.mjs";
 
-const referenceSha = "ae92eceb8e776ad57669707bff7f84db9390b711";
 const seedQb64 =
   "PM9jOGWNYfjM_oLXJNaQ8UlFSAV5ACjsUY7J16xfzrlpc9Ve3A5WYrZ4o_NHtP5lhp78Usspl9fyFdnCdItNd5JyqZ6dt8SXOt6TOqOCs-gy0obrwFkPPqBvVkEw";
 const saltQb64 =

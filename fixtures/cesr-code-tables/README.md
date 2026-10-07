@@ -1,8 +1,8 @@
 # CESR derivation code-table fixtures
 
 - Upstream: `https://github.com/WebOfTrust/signify-ts.git`
-- Reference commit: `ae92eceb8e776ad57669707bff7f84db9390b711`
-- Reference describe: `0.4.0-16-gae92ece`
+- Reference commit: `91a04a5edd804425f42be75ffbf034f8d14e5cb2`
+- Reference describe: `0.4.0-24-g91a04a5`
 - Source: `src/keri/core/matter.ts`
 - Tests: `test/core/matter.test.ts`
 - Fixture schema: `v1`

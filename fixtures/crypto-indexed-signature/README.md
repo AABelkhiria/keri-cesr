@@ -1,8 +1,8 @@
 # Indexed-signature (`Siger`) reference fixture
 
 This fixture records exact indexed-signature behavior from
-`WebOfTrust/signify-ts` commit `ae92eceb8e776ad57669707bff7f84db9390b711`
-(`0.4.0-16-gae92ece`, package `0.4.0`). Schema version 1 was generated on 2026-08-12.
+`WebOfTrust/signify-ts` commit `91a04a5edd804425f42be75ffbf034f8d14e5cb2`
+(`0.4.0-24-g91a04a5`, package `0.4.0`). Schema version 1 was generated on 2026-08-12.
 
 Upstream evidence:
 

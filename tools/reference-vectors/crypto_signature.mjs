@@ -6,8 +6,8 @@ import { decodeBase64Url } from "./node_modules/signify-ts/dist/keri/core/base64
 import { Cigar } from "./node_modules/signify-ts/dist/keri/core/cigar.js";
 import { MtrDex } from "./node_modules/signify-ts/dist/keri/core/matter.js";
 import { Verfer } from "./node_modules/signify-ts/dist/keri/core/verfer.js";
+import { referenceSha } from "./reference.mjs";
 
-const referenceSha = "ae92eceb8e776ad57669707bff7f84db9390b711";
 const ed25519Signature = fromHex(
   "78ddfcf41a4223e88342beaef7d9dec5059c6ddc6c34f12d666a4f53791812b6caf18943c429c3003fd4a526bb7ab20e61da912f4ec86b633e7aaccf0823370e",
 );

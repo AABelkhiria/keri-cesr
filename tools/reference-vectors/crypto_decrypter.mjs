@@ -9,10 +9,9 @@ import { Matter, MtrDex } from "./node_modules/signify-ts/dist/keri/core/matter.
 import { Salter } from "./node_modules/signify-ts/dist/keri/core/salter.js";
 import { Signer } from "./node_modules/signify-ts/dist/keri/core/signer.js";
 import libsodium from "./node_modules/libsodium-wrappers-sumo/dist/modules-sumo-esm/libsodium-wrappers.mjs";
+import { referenceSha } from "./reference.mjs";
 
 await libsodium.ready;
-
-const referenceSha = "ae92eceb8e776ad57669707bff7f84db9390b711";
 
 // Deterministic public test material from the pinned test/core/decrypter.test.ts.
 const seed = new Uint8Array([

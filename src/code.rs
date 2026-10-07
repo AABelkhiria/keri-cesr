@@ -2,7 +2,7 @@
 //!
 //! The table is pinned to `Matter.Sizes` and the codices in
 //! `signify-ts/src/keri/core/matter.ts` at reference commit
-//! `ae92eceb8e776ad57669707bff7f84db9390b711`.
+//! `91a04a5edd804425f42be75ffbf034f8d14e5cb2`.
 
 use std::{fmt, str::FromStr};
 

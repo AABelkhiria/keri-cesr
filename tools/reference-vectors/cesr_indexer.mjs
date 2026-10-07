@@ -7,8 +7,7 @@ import {
   IdxCrtSigDex,
   Indexer,
 } from "./node_modules/signify-ts/dist/keri/core/indexer.js";
-
-const referenceSha = "ae92eceb8e776ad57669707bff7f84db9390b711";
+import { referenceSha } from "./reference.mjs";
 
 function deterministicRaw(length, salt) {
   return Uint8Array.from(

@@ -7,10 +7,10 @@ import { Matter, MtrDex } from "./node_modules/signify-ts/dist/keri/core/matter.
 import { Signer } from "./node_modules/signify-ts/dist/keri/core/signer.js";
 import { Verfer } from "./node_modules/signify-ts/dist/keri/core/verfer.js";
 import libsodium from "./node_modules/libsodium-wrappers-sumo/dist/modules-sumo-esm/libsodium-wrappers.mjs";
+import { referenceSha } from "./reference.mjs";
 
 await libsodium.ready;
 
-const referenceSha = "ae92eceb8e776ad57669707bff7f84db9390b711";
 const referenceSeedQb64 =
   "ABg7MMQPKnZG-uOiRWVlH5ZvzilHheNYhtoE8NzeBsAr";
 const referenceSaltQb64 = "0AA2CGQNobs5jXCNoMATSody";

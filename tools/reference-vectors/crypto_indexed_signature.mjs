@@ -6,8 +6,8 @@ import { decodeBase64Url } from "./node_modules/signify-ts/dist/keri/core/base64
 import { IdrDex } from "./node_modules/signify-ts/dist/keri/core/indexer.js";
 import { Siger } from "./node_modules/signify-ts/dist/keri/core/siger.js";
 import { Verfer } from "./node_modules/signify-ts/dist/keri/core/verfer.js";
+import { referenceSha } from "./reference.mjs";
 
-const referenceSha = "ae92eceb8e776ad57669707bff7f84db9390b711";
 const raw64 = Uint8Array.from({ length: 64 }, (_, index) => index);
 const raw114 = Uint8Array.from({ length: 114 }, (_, index) => index);
 const ed25519Verifier = new Verfer({

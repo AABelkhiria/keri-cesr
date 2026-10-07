@@ -8,10 +8,10 @@ import { MtrDex } from "./node_modules/signify-ts/dist/keri/core/matter.js";
 import { Salter, Tier } from "./node_modules/signify-ts/dist/keri/core/salter.js";
 import { Signer } from "./node_modules/signify-ts/dist/keri/core/signer.js";
 import libsodium from "./node_modules/libsodium-wrappers-sumo/dist/modules-sumo-esm/libsodium-wrappers.mjs";
+import { referenceSha } from "./reference.mjs";
 
 await libsodium.ready;
 
-const referenceSha = "ae92eceb8e776ad57669707bff7f84db9390b711";
 const saltRaw = new TextEncoder().encode("0123456789abcdef");
 const serialization = new TextEncoder().encode(
   "abcdefghijklmnopqrstuvwxyz0123456789",
