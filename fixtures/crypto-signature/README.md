@@ -16,8 +16,8 @@ node tools/reference-vectors/crypto_signature.mjs
 ```
 
 `cases` covers all three unindexed-signature codes in the pinned `MatterCodex`: Ed25519, ECDSA
-secp256k1, and ECDSA secp256r1. The Ed25519 and P-256 cases use public signature/key vectors already
-generated for Roadmap 2.2; the secp256k1 case is deterministic opaque material because the pinned
+secp256k1, and ECDSA secp256r1. The Ed25519 and P-256 cases use public signature/key vectors from
+the `crypto-verifier` fixture; the secp256k1 case is deterministic opaque material because the pinned
 reference has no secp256k1 verifier. Each case records exact raw bytes, qb64, qualified UTF-8 bytes,
 qb64-derived qb2, reverse qb64 construction, and optional verifier association.
 

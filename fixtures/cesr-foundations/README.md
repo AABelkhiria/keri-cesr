@@ -6,7 +6,7 @@ These fixtures cover Base64, six-bit integer, and big-endian byte/integer behavi
 - Commit: `ae92eceb8e776ad57669707bff7f84db9390b711`
 - Generated: 2026-08-03
 - Sources: `src/keri/core/base64.ts`, `core.ts`, and `utils.ts`
-- Tests used as evidence: `test/core/base64.test.ts` and the Roadmap 1.1 cases in
+- Tests used as evidence: `test/core/base64.test.ts` and the Base64 and byte-helper cases in
   `test/core/coring.test.ts`
 - Binary encoding in `v1.json`: JSON arrays of unsigned decimal bytes
 - Integer encoding in `v1.json`: decimal strings, avoiding JSON number-width ambiguity

@@ -30,4 +30,4 @@ error category.
 The fixture also pins observable reference quirks: excess raw bytes are truncated, verifier
 association is mutable and does not validate algorithms, and omitted prior indices on both-list
 P-256 codes are mishandled because those codes are absent from `IndexedBothSigCodex`. Rust rejects
-or safely normalizes those states as documented in `PORTING.md`.
+or safely normalizes those states.
